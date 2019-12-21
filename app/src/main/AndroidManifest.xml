@@ -20,6 +20,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Frontend.AgreementPage" />
+        <activity android:name=".Frontend.IntroductionPage" />
     </application>
 
 </manifest>

@@ -1,56 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
+    <Button
+        android:id="@+id/continueButton"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:background="#8F9FF1"
+        android:text="Next"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/backButton"
         android:layout_width="150dp"
         android:layout_height="60dp"
         android:background="#8F9FF1"
-        android:text="Back"
+        android:text="Back "
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <Button
-        android:id="@+id/nextButton"
-        android:layout_width="150dp"
-        android:layout_height="60dp"
-        android:background="#8F9FF1"
-        android:enabled="false"
-        android:text="Next"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <CheckBox
-        android:id="@+id/agreementCheckBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="By checking this box, I confirmed that ..."
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.889" />
-
     <ScrollView
-        android:id="@+id/agreementScroll"
         android:layout_width="400dp"
-        android:layout_height="570dp"
-        android:layout_marginBottom="2dp"
-        android:scrollbarStyle="outsideOverlay"
-        app:layout_constraintBottom_toTopOf="@+id/agreementCheckBox"
+        android:layout_height="600dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.486"
+        app:layout_constraintHorizontal_bias="0.454"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.557">
+        app:layout_constraintVertical_bias="0.198">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -58,12 +42,11 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/agreementText"
+                android:id="@+id/introductionText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="TextView"
                 android:textSize="18sp" />
         </LinearLayout>
     </ScrollView>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

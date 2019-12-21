@@ -7,7 +7,7 @@ import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import com.xiugechen.reading_app.Frontend.AgreementPage
+import com.xiugechen.reading_app.Frontend.IntroductionPage
 
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         startButton.setOnClickListener {
-            startActivity(Intent(this, AgreementPage::class.java))
+            startActivity(Intent(this, IntroductionPage::class.java))
         }
     }
 }
