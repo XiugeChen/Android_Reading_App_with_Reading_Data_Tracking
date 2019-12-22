@@ -21,6 +21,7 @@
         </activity>
         <activity android:name=".Frontend.AgreementPage" />
         <activity android:name=".Frontend.IntroductionPage" />
+        <activity android:name=".Frontend.PersonalInfoPage" />
     </application>
 
 </manifest>

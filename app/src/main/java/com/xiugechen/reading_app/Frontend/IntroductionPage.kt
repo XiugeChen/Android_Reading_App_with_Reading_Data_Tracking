@@ -18,11 +18,11 @@ class IntroductionPage : AppCompatActivity() {
 
         addListener()
 
-        setAgreementText()
+        setIntroductionText()
     }
 
     private fun addListener() {
-        continueButton.setOnClickListener {
+        nextButton.setOnClickListener {
             startActivity(Intent(this, AgreementPage::class.java))
         }
 
@@ -31,7 +31,7 @@ class IntroductionPage : AppCompatActivity() {
         }
     }
 
-    private fun setAgreementText() {
+    private fun setIntroductionText() {
         introductionText.setText("Introduction test \n test 1 \n test 2 \n test 3 \n \n \n \n " +
                 "\n \n \n \n test 4 \n \n \n \n test 5 \n \n \n \n \n test 6 \n \n \n \n" +
                 "test 6 \n \n \n \n test 7 \n \n \n \n test 8 \n \n \n \n test 9 \n \n \n \n" +

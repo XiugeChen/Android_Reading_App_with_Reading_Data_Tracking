@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.xiugechen.reading_app.MainActivity
 import com.xiugechen.reading_app.R
 import kotlinx.android.synthetic.main.activity_agreement_page.*
 
@@ -27,7 +26,7 @@ class AgreementPage : AppCompatActivity() {
         }
 
         nextButton.setOnClickListener {
-            Log.d("test", "To do")
+            startActivity(Intent(this, PersonalInfoPage::class.java))
         }
 
         agreementCheckBox.setOnClickListener {
