@@ -19,9 +19,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Frontend.AgreementPage" />
-        <activity android:name=".Frontend.IntroductionPage" />
-        <activity android:name=".Frontend.PersonalInfoPage" />
+        <activity android:name=".Presentation.AgreementPage" />
+        <activity android:name=".Presentation.IntroductionPage" />
+        <activity android:name=".Presentation.PersonalInfoPage" />
     </application>
 
 </manifest>

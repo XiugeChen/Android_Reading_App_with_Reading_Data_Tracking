@@ -1,4 +1,4 @@
-package com.xiugechen.reading_app.Frontend
+package com.xiugechen.reading_app.Presentation
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.activity_introduction_page.*
 class IntroductionPage : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        Log.d("IntroductionPage", "onCreate: Called")
+        Log.i("IntroductionPage", "onCreate: Called")
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_introduction_page)
