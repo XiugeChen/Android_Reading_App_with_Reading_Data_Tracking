@@ -5,15 +5,27 @@ import java.io.InputStream
 import java.lang.Exception
 
 class DataReader {
+    private var cachedText = HashMap<Int, String>()
 
     fun readTxt(activity: AppCompatActivity, fileResId: Int): String {
-        try {
-            val inputStream: InputStream = activity.resources.openRawResource(fileResId)
-            return inputStream.bufferedReader().use { it.readText() }
+        if (this.cachedText.containsKey(fileResId)) {
+            val result = this.cachedText[fileResId]
 
-        } catch (e: Exception) {
-            e.printStackTrace()
-            return ""
+            if (result != null) return result
         }
+        else {
+            try {
+                val inputStream: InputStream = activity.resources.openRawResource(fileResId)
+                val result = inputStream.bufferedReader().use { it.readText() }
+
+                this.cachedText[fileResId] = result
+                return result
+
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+
+        return ""
     }
 }

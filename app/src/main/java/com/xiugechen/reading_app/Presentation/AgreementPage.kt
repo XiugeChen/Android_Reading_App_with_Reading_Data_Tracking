@@ -6,7 +6,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.xiugechen.reading_app.Data.DataManager
 import com.xiugechen.reading_app.R
-import kotlinx.android.synthetic.main.activity_agreement_page.*
+import kotlinx.android.synthetic.main.content_agreement_page.*
 
 class AgreementPage : AppCompatActivity() {
 
@@ -14,7 +14,7 @@ class AgreementPage : AppCompatActivity() {
         Log.i("AgreementPage", "onCreate: Called")
 
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_agreement_page)
+        setContentView(R.layout.content_agreement_page)
 
         addListener()
 
@@ -31,16 +31,11 @@ class AgreementPage : AppCompatActivity() {
         }
 
         agreementCheckBox.setOnClickListener {
-            if (nextButton.isEnabled) {
-                nextButton.setEnabled(false)
-            }
-            else {
-                nextButton.setEnabled(true)
-            }
+            nextButton.isEnabled = !nextButton.isEnabled
         }
     }
 
     private fun setAgreementText() {
-        agreementText.setText(DataManager.dataReader.readTxt(this, R.raw._agreement))
+        agreementText.text = DataManager.dataReader.readTxt(this, R.raw._agreement)
     }
 }

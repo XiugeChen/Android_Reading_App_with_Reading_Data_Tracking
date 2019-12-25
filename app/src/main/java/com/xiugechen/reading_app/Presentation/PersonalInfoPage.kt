@@ -3,13 +3,11 @@ package com.xiugechen.reading_app.Presentation
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import android.widget.AdapterView
 import androidx.appcompat.app.AppCompatActivity
 import com.xiugechen.reading_app.Data.DataManager
 import com.xiugechen.reading_app.Data.Participant
 import com.xiugechen.reading_app.R
-import kotlinx.android.synthetic.main.activity_personal_info_page.*
+import kotlinx.android.synthetic.main.content_personal_info_page.*
 
 class PersonalInfoPage : AppCompatActivity() {
 
@@ -17,7 +15,7 @@ class PersonalInfoPage : AppCompatActivity() {
         Log.i("PersonalInfoPage", "onCreate: Called")
 
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_personal_info_page)
+        setContentView(R.layout.content_personal_info_page)
 
         addListener()
     }
@@ -33,6 +31,7 @@ class PersonalInfoPage : AppCompatActivity() {
             val gender = genders[genderSpinner.selectedItemPosition]
 
             DataManager.participant = Participant(fullname, gender)
+            DataManager.printData()
 
             startActivity(Intent(this, FileSelectionPage::class.java))
         }

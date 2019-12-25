@@ -3,11 +3,12 @@ package com.xiugechen.reading_app.Presentation
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.xiugechen.reading_app.Data.DataManager
 import com.xiugechen.reading_app.MainActivity
 import com.xiugechen.reading_app.R
-import kotlinx.android.synthetic.main.activity_introduction_page.*
+import kotlinx.android.synthetic.main.content_introduction_page.*
 
 class IntroductionPage : AppCompatActivity() {
 
@@ -15,7 +16,7 @@ class IntroductionPage : AppCompatActivity() {
         Log.i("IntroductionPage", "onCreate: Called")
 
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_introduction_page)
+        setContentView(R.layout.content_introduction_page)
 
         addListener()
 
@@ -33,6 +34,6 @@ class IntroductionPage : AppCompatActivity() {
     }
 
     private fun setIntroductionText() {
-        introductionText.setText(DataManager.dataReader.readTxt(this, R.raw._introduction))
+        introductionText.text = DataManager.dataReader.readTxt(this, R.raw._introduction)
     }
 }
