@@ -30,11 +30,11 @@ class PersonalInfoPage : AppCompatActivity() {
         nextButton.setOnClickListener {
             val fullname: String = nameInputText.text.toString()
             val genders = resources.getStringArray(R.array.gender_arrays)
-
             val gender = genders[genderSpinner.selectedItemPosition]
 
             DataManager.participant = Participant(fullname, gender)
-            DataManager.printData()
+
+            startActivity(Intent(this, FileSelectionPage::class.java))
         }
     }
 }
