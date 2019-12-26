@@ -3,6 +3,7 @@ package com.xiugechen.reading_app.Presentation
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.xiugechen.reading_app.Data.DataManager
 import com.xiugechen.reading_app.Data.Participant
@@ -26,11 +27,17 @@ class PersonalInfoPage : AppCompatActivity() {
         }
 
         nextButton.setOnClickListener {
-            val fullname: String = nameInputText.text.toString()
+            val fullname: String = nameInputText.text.toString().trim()
+
+            if (fullname.isEmpty()) {
+                Toast.makeText(this,"Name required", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             val genders = resources.getStringArray(R.array.gender_arrays)
             val gender = genders[genderSpinner.selectedItemPosition]
 
-            DataManager.participant = Participant(fullname, gender)
+            DataManager.mParticipant = Participant(fullname, gender)
             DataManager.printData()
 
             startActivity(Intent(this, FileSelectionPage::class.java))

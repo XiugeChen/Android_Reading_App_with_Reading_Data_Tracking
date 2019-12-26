@@ -34,6 +34,6 @@ class IntroductionPage : AppCompatActivity() {
     }
 
     private fun setIntroductionText() {
-        introductionText.text = DataManager.dataReader.readTxt(this, R.raw._introduction)
+        introductionText.text = DataManager.mDataReader.readTxt(this, R.raw._introduction)
     }
 }

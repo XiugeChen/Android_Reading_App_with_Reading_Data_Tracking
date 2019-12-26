@@ -13,4 +13,8 @@ class Participant {
     override fun toString(): String {
         return "%s,%s".format(mFullname, mGender)
     }
+
+    fun isSet(): Boolean {
+        return !mFullname.isEmpty() && !mGender.isEmpty()
+    }
 }

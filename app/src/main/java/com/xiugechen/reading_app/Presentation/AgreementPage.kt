@@ -27,7 +27,12 @@ class AgreementPage : AppCompatActivity() {
         }
 
         nextButton.setOnClickListener {
-            startActivity(Intent(this, PersonalInfoPage::class.java))
+            if (DataManager.mParticipant.isSet()) {
+                startActivity(Intent(this, FileSelectionPage::class.java))
+            }
+            else {
+                startActivity(Intent(this, PersonalInfoPage::class.java))
+            }
         }
 
         agreementCheckBox.setOnClickListener {
@@ -36,6 +41,6 @@ class AgreementPage : AppCompatActivity() {
     }
 
     private fun setAgreementText() {
-        agreementText.text = DataManager.dataReader.readTxt(this, R.raw._agreement)
+        agreementText.text = DataManager.mDataReader.readTxt(this, R.raw._agreement)
     }
 }

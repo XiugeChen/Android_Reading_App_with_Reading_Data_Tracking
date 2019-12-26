@@ -3,10 +3,13 @@ package com.xiugechen.reading_app.Data
 import android.util.Log
 
 object DataManager {
-    var participant = Participant("", "")
-    var dataReader = DataReader()
+    var mParticipant = Participant("", "")
+    var mDataReader = DataReader()
 
     fun printData() {
-        Log.d("DataManager", "Data: $participant")
+        val currentTime = System.currentTimeMillis()
+
+        Log.d("DataManager", "Data:fullname,gender,timeMs")
+        Log.d("DataManager", "Data:$mParticipant,%d".format(currentTime))
     }
 }
