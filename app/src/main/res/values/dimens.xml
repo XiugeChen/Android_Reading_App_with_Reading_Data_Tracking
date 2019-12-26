@@ -1,3 +1,13 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
+
+    <dimen name="default_text_size">18sp</dimen>
+
+    <dimen name="button_height">60dp</dimen>
+    <dimen name="button_width">150dp</dimen>
+    <dimen name="button_text_size">24sp</dimen>
+
+    <dimen name="scroll_margin_top">10dp</dimen>
+    <dimen name="scroll_height">600dp</dimen>
+    <dimen name="scroll_width">400dp</dimen>
 </resources>

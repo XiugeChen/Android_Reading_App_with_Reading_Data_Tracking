@@ -7,18 +7,18 @@
 
     <Button
         android:id="@+id/backButton"
-        android:layout_width="150dp"
-        android:layout_height="60dp"
-        android:background="#8F9FF1"
+        android:layout_width="@dimen/button_width"
+        android:layout_height="@dimen/button_height"
+        android:background="@color/colorButton"
         android:text="@string/back_action"
-        android:textSize="24sp"
+        android:textSize="@dimen/button_text_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ScrollView
-        android:layout_width="400dp"
-        android:layout_height="600dp"
-        android:layout_marginTop="40dp"
+        android:layout_width="@dimen/scroll_width"
+        android:layout_height="@dimen/scroll_height"
+        android:layout_marginTop="@dimen/scroll_margin_top"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.454"
         app:layout_constraintStart_toStartOf="parent"
