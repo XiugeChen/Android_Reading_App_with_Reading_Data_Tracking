@@ -2,10 +2,15 @@
     <string name="app_name">Reading_App</string>
     <string name="action_settings">Settings</string>
 
+    <!-- file reading -->
+    <string name="unread_file">unread</string>
+    <string name="read_file">read</string>
+
     <!-- action (button) name -->
     <string name="start_action">Start</string>
     <string name="next_action">Next</string>
     <string name="back_action">Back</string>
+    <string name="read_action">Read</string>
 
     <!-- prompt content -->
     <string name="welcome_prompt">Welcome!</string>

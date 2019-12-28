@@ -26,7 +26,7 @@
         android:id="@+id/startButton"
         android:layout_width="126dp"
         android:layout_height="66dp"
-        android:background="@color/colorButton"
+        android:background="@color/colorPageButton"
         android:text="@string/start_action"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="36sp"

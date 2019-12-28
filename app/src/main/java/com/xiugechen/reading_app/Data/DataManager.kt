@@ -5,6 +5,7 @@ import android.util.Log
 object DataManager {
     var mParticipant = Participant("", "")
     var mDataReader = DataReader()
+    var mCachedFileDisplays = ArrayList<FileDisplay>()
 
     fun printData() {
         val currentTime = System.currentTimeMillis()

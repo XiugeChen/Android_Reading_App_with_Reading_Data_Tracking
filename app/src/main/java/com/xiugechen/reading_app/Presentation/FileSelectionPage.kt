@@ -4,10 +4,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.xiugechen.reading_app.Data.DataManager
+import com.xiugechen.reading_app.Data.FileDisplay
+import com.xiugechen.reading_app.Data.ReadIndicator
 import com.xiugechen.reading_app.R
 import kotlinx.android.synthetic.main.content_file_selection_page.*
-import java.io.InputStream
 
 class FileSelectionPage : AppCompatActivity() {
 
@@ -18,7 +20,6 @@ class FileSelectionPage : AppCompatActivity() {
         setContentView(R.layout.content_file_selection_page)
 
         addListener()
-
         addFiles()
     }
 
@@ -34,12 +35,23 @@ class FileSelectionPage : AppCompatActivity() {
     }
 
     private fun addFiles() {
-        var lists = this.resources.assets.list("reading_files")
+        if (DataManager.mCachedFileDisplays.isEmpty()) {
+            var fileNames = this.resources.assets.list("reading_files")
 
-        if (lists != null) {
-            for (list in lists) {
-                Log.d("1", list)
+            if (fileNames != null) {
+                for (fileName in fileNames) {
+                    DataManager.mCachedFileDisplays.add(FileDisplay(fileName,
+                        "description", ReadIndicator.UNREAD))
+                }
+            }
+            else {
+                DataManager.mCachedFileDisplays.add(FileDisplay("No files were found",
+                    "please try it again", ReadIndicator.UNKOWN))
             }
         }
+
+        fileRecyclerView.setHasFixedSize(true) // could use to improve performance if changes in content do not change the layout size of the RecyclerView
+        fileRecyclerView.layoutManager = LinearLayoutManager(this)
+        fileRecyclerView.adapter = FileAdapter()
     }
 }

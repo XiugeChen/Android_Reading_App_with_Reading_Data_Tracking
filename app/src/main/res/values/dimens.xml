@@ -1,13 +1,28 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
 
+    <!-- text -->
     <dimen name="default_text_size">18sp</dimen>
+    <dimen name="text_padding">6dp</dimen>
 
-    <dimen name="button_height">60dp</dimen>
-    <dimen name="button_width">150dp</dimen>
-    <dimen name="button_text_size">24sp</dimen>
+    <!-- card view -->
+    <dimen name="card_margin">8dp</dimen>
 
+    <!-- button -->
+    <dimen name="page_switch_button_height">60dp</dimen>
+    <dimen name="page_switch_button_width">150dp</dimen>
+    <dimen name="page_switch_text_size">24sp</dimen>
+
+    <dimen name="inpage_text_size">18sp</dimen>
+
+    <!-- scroll view -->
     <dimen name="scroll_margin_top">10dp</dimen>
     <dimen name="scroll_height">600dp</dimen>
     <dimen name="scroll_width">400dp</dimen>
+
+    <!-- recycler view -->
+    <dimen name="recycler_margin_top">10dp</dimen>
+    <dimen name="recycler_height">600dp</dimen>
+    <dimen name="recycler_width">400dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
 </resources>
