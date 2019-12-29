@@ -3,7 +3,7 @@
 
     <!-- text -->
     <dimen name="default_text_size">18sp</dimen>
-    <dimen name="text_padding">6dp</dimen>
+    <dimen name="text_padding">8dp</dimen>
 
     <!-- card view -->
     <dimen name="card_margin">8dp</dimen>
@@ -17,6 +17,7 @@
 
     <!-- scroll view -->
     <dimen name="scroll_margin_top">10dp</dimen>
+    <dimen name="scroll_margin_bottom">10dp</dimen>
     <dimen name="scroll_height">600dp</dimen>
     <dimen name="scroll_width">400dp</dimen>
 

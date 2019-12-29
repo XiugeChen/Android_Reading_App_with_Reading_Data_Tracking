@@ -29,7 +29,6 @@
         android:layout_height="@dimen/scroll_height"
         android:layout_marginTop="@dimen/scroll_margin_top"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.454"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -43,7 +42,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/name_input_prompt"
-                android:textSize="@dimen/default_text_size" />
+                android:textSize="@dimen/default_text_size"
+                android:padding="@dimen/text_padding"/>
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/nameInputText"
@@ -51,7 +51,8 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/name_hint_prompt"
                 android:imeOptions="actionDone"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:padding="@dimen/text_padding"/>
 
             <Space
                 android:layout_width="1dp"
@@ -62,14 +63,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/gender_input_prompt"
-                android:textSize="@dimen/default_text_size" />
+                android:textSize="@dimen/default_text_size"
+                android:padding="@dimen/text_padding"/>
 
             <Spinner
                 android:id="@+id/genderSpinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:entries="@array/gender_arrays"
-                android:spinnerMode="dropdown" />
+                android:spinnerMode="dropdown"
+                android:padding="@dimen/text_padding"/>
 
             <Space
                 android:layout_width="1dp"
@@ -80,14 +83,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="TEST: "
-                android:textSize="@dimen/default_text_size" />
+                android:textSize="@dimen/default_text_size"
+                android:padding="@dimen/text_padding"/>
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/testInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Test"
-                android:imeOptions="actionDone" />
+                android:imeOptions="actionDone"
+                android:padding="@dimen/text_padding"/>
 
         </LinearLayout>
     </ScrollView>
