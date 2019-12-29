@@ -5,11 +5,32 @@ import java.io.InputStream
 import java.lang.Exception
 
 class DataReader {
-    private var mCachedText = HashMap<Int, Triple<String, String, String>>()
+    private var mCachedTxtId = HashMap<Int, Triple<String, String, String>>()
 
-    fun readTxt(activity: AppCompatActivity, fileResId: Int): Triple<String, String, String> {
-        if (this.mCachedText.containsKey(fileResId)) {
-            val result = this.mCachedText[fileResId]
+    /**
+     * Open resources from assets folder by file path, put read data into cached in DataManager
+     */
+    fun readTxtByName(activity: AppCompatActivity, filename: String) {
+        val filepath = "reading_files/$filename"
+
+        try {
+            val inputStream: InputStream = activity.resources.assets.open(filepath)
+            val readResult = readTitleDescripBody(inputStream)
+            val file = FileDisplay(filename, readResult.first, readResult.second,
+                readResult.third, ReadIndicator.UNREAD)
+
+            DataManager.mCachedFileDisplays.add(file)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    /**
+     * Open resources from res folder by res id, return data
+     */
+    fun readTxtById(activity: AppCompatActivity, fileResId: Int): Triple<String, String, String> {
+        if (this.mCachedTxtId.containsKey(fileResId)) {
+            val result = this.mCachedTxtId[fileResId]
 
             if (result != null) return result
         }
@@ -18,7 +39,7 @@ class DataReader {
                 val inputStream: InputStream = activity.resources.openRawResource(fileResId)
                 val result = readTitleDescripBody(inputStream)
 
-                this.mCachedText[fileResId] = result
+                this.mCachedTxtId[fileResId] = result
                 return result
 
             } catch (e: Exception) {

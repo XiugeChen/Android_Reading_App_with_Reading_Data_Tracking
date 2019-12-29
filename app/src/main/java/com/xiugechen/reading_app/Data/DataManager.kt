@@ -6,6 +6,7 @@ object DataManager {
     var mParticipant = Participant("", "")
     var mDataReader = DataReader()
     var mCachedFileDisplays = ArrayList<FileDisplay>()
+    var mNextFileDisplay = FileDisplay("", "", "", "", ReadIndicator.UNKOWN)
 
     fun printData() {
         val currentTime = System.currentTimeMillis()

@@ -6,10 +6,9 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.xiugechen.reading_app.Data.DataManager
-import com.xiugechen.reading_app.Data.FileDisplay
-import com.xiugechen.reading_app.Data.ReadIndicator
 import com.xiugechen.reading_app.R
 import kotlinx.android.synthetic.main.content_file_selection_page.*
+import kotlinx.android.synthetic.main.content_file_selection_page.backButton
 
 class FileSelectionPage : AppCompatActivity() {
 
@@ -40,18 +39,13 @@ class FileSelectionPage : AppCompatActivity() {
 
             if (fileNames != null) {
                 for (fileName in fileNames) {
-                    DataManager.mCachedFileDisplays.add(FileDisplay(fileName,
-                        "description", ReadIndicator.UNREAD))
+                    DataManager.mDataReader.readTxtByName(this, fileName)
                 }
-            }
-            else {
-                DataManager.mCachedFileDisplays.add(FileDisplay("No files were found",
-                    "please try it again", ReadIndicator.UNKOWN))
             }
         }
 
         fileRecyclerView.setHasFixedSize(true) // could use to improve performance if changes in content do not change the layout size of the RecyclerView
         fileRecyclerView.layoutManager = LinearLayoutManager(this)
-        fileRecyclerView.adapter = FileAdapter()
+        fileRecyclerView.adapter = FileAdapter(this)
     }
 }

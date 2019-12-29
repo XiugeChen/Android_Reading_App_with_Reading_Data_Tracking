@@ -3,7 +3,6 @@ package com.xiugechen.reading_app.Presentation
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.xiugechen.reading_app.Data.DataManager
 import com.xiugechen.reading_app.MainActivity
@@ -34,7 +33,7 @@ class IntroductionPage : AppCompatActivity() {
     }
 
     private fun setIntroductionText() {
-        val readText = DataManager.mDataReader.readTxt(this, R.raw._introduction)
+        val readText = DataManager.mDataReader.readTxtById(this, R.raw._introduction)
         introductionTextTitle.text = readText.first
         introductionTextBody.text = readText.third
     }

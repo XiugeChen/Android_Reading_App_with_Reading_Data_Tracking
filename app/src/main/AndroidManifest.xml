@@ -23,6 +23,7 @@
         <activity android:name=".Presentation.IntroductionPage" />
         <activity android:name=".Presentation.PersonalInfoPage" />
         <activity android:name=".Presentation.FileSelectionPage" />
+        <activity android:name=".Presentation.ReadingPage" />
     </application>
 
 </manifest>

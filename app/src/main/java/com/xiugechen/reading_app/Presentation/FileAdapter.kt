@@ -1,5 +1,6 @@
 package com.xiugechen.reading_app.Presentation
 
+import android.content.Intent
 import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
@@ -7,14 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.xiugechen.reading_app.Data.DataManager
-import com.xiugechen.reading_app.Data.FileDisplay
 import com.xiugechen.reading_app.Data.ReadIndicator
 import com.xiugechen.reading_app.R
+import java.lang.Exception
 
-class FileAdapter() : RecyclerView.Adapter<FileAdapter.ViewHolder>() {
+class FileAdapter(val filePage: FileSelectionPage) : RecyclerView.Adapter<FileAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val fileView = LayoutInflater.from(parent.context).inflate(R.layout.content_file_selection_row, parent, false)
@@ -42,7 +42,8 @@ class FileAdapter() : RecyclerView.Adapter<FileAdapter.ViewHolder>() {
 
         holder.readButton.setOnClickListener {
             DataManager.mCachedFileDisplays[position].readIndicator = ReadIndicator.READ
-            Log.d("FileAdapter", "onBindViewHolder: TODO")
+            DataManager.mNextFileDisplay = DataManager.mCachedFileDisplays[position]
+            filePage.startActivity(Intent(filePage, ReadingPage::class.java))
         }
     }
 

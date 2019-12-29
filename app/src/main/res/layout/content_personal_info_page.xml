@@ -25,12 +25,14 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <ScrollView
-        android:layout_width="@dimen/scroll_width"
-        android:layout_height="@dimen/scroll_height"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:layout_marginTop="@dimen/scroll_margin_top"
+        android:layout_marginBottom="@dimen/scroll_margin_bottom"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/nextButton" >
 
         <LinearLayout
             android:layout_width="match_parent"
