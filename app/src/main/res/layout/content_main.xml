@@ -12,6 +12,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto"
         android:text="@string/welcome_prompt"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="36sp"
@@ -24,16 +25,15 @@
 
     <Button
         android:id="@+id/startButton"
-        android:layout_width="126dp"
-        android:layout_height="66dp"
-        android:background="@color/colorPageButton"
+        android:layout_width="250dp"
+        android:layout_height="60dp"
+        android:background="@drawable/round_button"
+        android:fontFamily="@font/roboto"
         android:text="@string/start_action"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="36sp"
         android:typeface="normal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.658" />

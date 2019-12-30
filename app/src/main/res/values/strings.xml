@@ -6,7 +6,7 @@
     <string name="unread_file">unread</string>
     <string name="read_file">read</string>
 
-    <!-- action (button) name -->
+    <!-- action (round_button) name -->
     <string name="start_action">Start</string>
     <string name="next_action">Next</string>
     <string name="back_action">Back</string>

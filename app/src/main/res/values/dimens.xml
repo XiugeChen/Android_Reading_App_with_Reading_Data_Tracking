@@ -9,7 +9,7 @@
     <!-- card view -->
     <dimen name="card_margin">8dp</dimen>
 
-    <!-- button -->
+    <!-- round_button -->
     <dimen name="page_switch_button_height">60dp</dimen>
     <dimen name="page_switch_button_width">150dp</dimen>
     <dimen name="page_switch_text_size">24sp</dimen>

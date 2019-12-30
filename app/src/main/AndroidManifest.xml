@@ -24,6 +24,10 @@
         <activity android:name=".Presentation.PersonalInfoPage" />
         <activity android:name=".Presentation.FileSelectionPage" />
         <activity android:name=".Presentation.ReadingPage" />
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
     <uses-permission android:name="android.permission.VIBRATE" />

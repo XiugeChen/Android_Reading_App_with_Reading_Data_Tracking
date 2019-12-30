@@ -4,10 +4,15 @@
     <color name="colorPrimaryDark">#0E2B9E</color>
     <color name="colorAccent">#94670E</color>
 
-    <!-- button -->
-    <color name="colorPageButton">#90A0F0</color>
-    <color name="colorInPageButton">#D1D7FC</color>
+    <!-- round_button -->
+    <color name="button_dark">#8394EC</color>
+    <color name="button_light">#B0BBF3</color>
+    <color name="lighted_button_dark">#C2CAF5</color>
+    <color name="lighted_button_light">#E4E5F5</color>
 
     <!-- file reading -->
     <color name="fileDescription">#A2A1A1</color>
+
+    <!-- base color -->
+    <color name="light_gray">#B6B3B3</color>
 </resources>

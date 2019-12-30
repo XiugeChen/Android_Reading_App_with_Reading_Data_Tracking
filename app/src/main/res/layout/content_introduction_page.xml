@@ -8,7 +8,8 @@
         android:id="@+id/backButton"
         android:layout_width="@dimen/page_switch_button_width"
         android:layout_height="@dimen/page_switch_button_height"
-        android:background="@color/colorPageButton"
+        android:background="@drawable/round_button"
+        android:fontFamily="@font/roboto"
         android:text="@string/back_action"
         android:textSize="@dimen/page_switch_text_size"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -18,7 +19,8 @@
         android:id="@+id/nextButton"
         android:layout_width="@dimen/page_switch_button_width"
         android:layout_height="@dimen/page_switch_button_height"
-        android:background="@color/colorPageButton"
+        android:background="@drawable/round_button"
+        android:fontFamily="@font/roboto"
         android:text="@string/next_action"
         android:textSize="@dimen/page_switch_text_size"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -29,9 +31,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/scroll_margin_top"
+        android:fontFamily="@font/roboto_black"
+        android:padding="@dimen/text_padding"
         android:textSize="@dimen/default_text_size"
         android:textStyle="bold"
-        android:padding="@dimen/text_padding"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -58,6 +61,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/default_text_size"
                 android:padding="@dimen/text_padding"
+                android:fontFamily="@font/roboto"
                 android:justificationMode="inter_word"/>
         </LinearLayout>
     </ScrollView>
