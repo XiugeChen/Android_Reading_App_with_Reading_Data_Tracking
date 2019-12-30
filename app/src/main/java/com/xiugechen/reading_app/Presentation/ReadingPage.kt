@@ -1,8 +1,11 @@
 package com.xiugechen.reading_app.Presentation
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.text.LineBreaker
 import android.os.Bundle
+import android.os.VibrationEffect
+import android.os.Vibrator
 import android.text.Layout
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -24,6 +27,9 @@ class ReadingPage : AppCompatActivity() {
 
     private fun addListener() {
         backButton.setOnClickListener {
+            val vibrator = this.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+            vibrator.vibrate(VibrationEffect.createOneShot(this.resources.getInteger(R.integer.vibrate_interval).toLong(),
+                VibrationEffect.DEFAULT_AMPLITUDE))
             startActivity(Intent(this, FileSelectionPage::class.java))
         }
     }

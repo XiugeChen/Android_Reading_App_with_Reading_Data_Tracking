@@ -1,7 +1,10 @@
 package com.xiugechen.reading_app
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.VibrationEffect
+import android.os.Vibrator
 import android.util.Log
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
@@ -47,6 +50,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         startButton.setOnClickListener {
+            val vibrator = this.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+            vibrator.vibrate(VibrationEffect.createOneShot(this.resources.getInteger(R.integer.vibrate_interval).toLong(),
+                VibrationEffect.DEFAULT_AMPLITUDE))
             startActivity(Intent(this, IntroductionPage::class.java))
         }
     }

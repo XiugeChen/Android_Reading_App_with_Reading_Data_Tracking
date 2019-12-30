@@ -26,4 +26,8 @@
         <activity android:name=".Presentation.ReadingPage" />
     </application>
 
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera.front" android:required="true" />
+
 </manifest>
