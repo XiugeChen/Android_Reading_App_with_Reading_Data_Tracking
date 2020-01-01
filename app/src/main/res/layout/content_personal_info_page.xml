@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:id="@+id/personalInfoPage"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <Button
@@ -12,6 +14,7 @@
         android:fontFamily="@font/roboto"
         android:text="@string/back_action"
         android:textSize="@dimen/page_switch_text_size"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -23,6 +26,7 @@
         android:fontFamily="@font/roboto"
         android:text="@string/next_action"
         android:textSize="@dimen/page_switch_text_size"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -47,6 +51,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/name_input_prompt"
                 android:textSize="@dimen/default_text_size"
+                android:textColor="@color/black"
                 android:padding="@dimen/text_padding"
                 android:fontFamily="@font/roboto"/>
 
@@ -70,6 +75,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/gender_input_prompt"
                 android:textSize="@dimen/default_text_size"
+                android:textColor="@color/black"
                 android:padding="@dimen/text_padding"
                 android:fontFamily="@font/roboto"/>
 
@@ -92,6 +98,7 @@
                 android:layout_height="wrap_content"
                 android:text="TEST: "
                 android:textSize="@dimen/default_text_size"
+                android:textColor="@color/black"
                 android:padding="@dimen/text_padding"
                 android:fontFamily="@font/roboto"/>
 

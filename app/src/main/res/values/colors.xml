@@ -15,4 +15,5 @@
 
     <!-- base color -->
     <color name="light_gray">#B6B3B3</color>
+    <color name="black">#000000</color>
 </resources>

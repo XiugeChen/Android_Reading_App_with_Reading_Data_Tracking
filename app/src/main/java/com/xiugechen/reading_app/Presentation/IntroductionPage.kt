@@ -21,7 +21,6 @@ class IntroductionPage : AppCompatActivity() {
         setContentView(R.layout.content_introduction_page)
 
         addListener()
-
         setIntroductionText()
     }
 

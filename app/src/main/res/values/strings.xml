@@ -11,6 +11,7 @@
     <string name="next_action">Next</string>
     <string name="back_action">Back</string>
     <string name="read_action">Read</string>
+    <string name="close_action">Close</string>
 
     <!-- prompt content -->
     <string name="welcome_prompt">Welcome!</string>
