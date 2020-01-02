@@ -4,7 +4,7 @@ import android.media.MediaRecorder
 import java.lang.Exception
 
 object VideoCapture {
-    var isRecording = false
+    var isRecording = true
     var mediaRecorder = MediaRecorder()
 
     fun StartRecord_FrontCamera() {
@@ -12,15 +12,13 @@ object VideoCapture {
             throw Exception("Front Camera already in use, please try again later")
         }
         else {
-
-
+            
             isRecording = true
         }
     }
 
     fun EndRecordAndSave_FrontCamera() {
         if (isRecording) {
-
 
             isRecording = false
         }

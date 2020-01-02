@@ -2,6 +2,8 @@ package com.xiugechen.reading_app.Presentation
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.transition.Slide
 import android.transition.TransitionManager
@@ -21,7 +23,9 @@ object MyPopupWindow {
      * Pop up new window from appActivity, with message textDisplay
      */
     @SuppressLint("InflateParams")
-    fun showTextPopup(textDisplay: String, appActivity: AppCompatActivity, appLayout: Int) {
+    fun showTextPopup(textToDisplay: String, appActivity: AppCompatActivity, appLayout: Int,
+                      closeFun: () -> Unit) {
+
         val inflater: LayoutInflater = appActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE)
                 as LayoutInflater
 
@@ -49,10 +53,11 @@ object MyPopupWindow {
         val mPopupText = popupView.findViewById<TextView>(R.id.popupText)
         val closeButton = popupView.findViewById<Button>(R.id.closeButton)
 
-        mPopupText.text = textDisplay
+        mPopupText.text = textToDisplay
 
         closeButton.setOnClickListener {
             popupWindow.dismiss()
+            closeFun()
         }
 
         // Show the popup window on app only after all the lifecycle methods are called

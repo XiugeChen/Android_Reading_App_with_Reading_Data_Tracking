@@ -32,14 +32,7 @@ class ReadingPage : AppCompatActivity() {
             vibrator.vibrate(VibrationEffect.createOneShot(this.resources.getInteger(R.integer.vibrate_interval).toLong(),
                 VibrationEffect.DEFAULT_AMPLITUDE))
 
-            try {
-                VideoCapture.EndRecordAndSave_FrontCamera()
-            }
-            catch (e: Exception) {
-                e.printStackTrace()
-            }
-
-            startActivity(Intent(this, FileSelectionPage::class.java))
+            endRecording()
         }
     }
 
@@ -54,8 +47,22 @@ class ReadingPage : AppCompatActivity() {
         }
         catch (e: Exception) {
             e.printStackTrace()
-            MyPopupWindow.showTextPopup(ErrorMsg.RECORD_ERROR_MSG, this, R.id.readingPage)
+            MyPopupWindow.showTextPopup(ErrorMsg.RECORD_START_ERROR_MSG, this, R.id.readingPage) {
+                startActivity(Intent(this, FileSelectionPage::class.java))
+            }
+        }
+    }
+
+    private fun endRecording() {
+        try {
+            VideoCapture.EndRecordAndSave_FrontCamera()
             startActivity(Intent(this, FileSelectionPage::class.java))
+        }
+        catch (e: Exception) {
+            e.printStackTrace()
+            MyPopupWindow.showTextPopup(ErrorMsg.RECORD_END_ERROR_MSG, this, R.id.readingPage) {
+                startActivity(Intent(this, FileSelectionPage::class.java))
+            }
         }
     }
 }
