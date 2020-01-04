@@ -8,7 +8,6 @@ import android.os.Vibrator
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.xiugechen.reading_app.Data.DataManager
-import com.xiugechen.reading_app.Data.ErrorMsg
 import com.xiugechen.reading_app.Data.VideoCapture
 import com.xiugechen.reading_app.R
 import kotlinx.android.synthetic.main.content_reading_page.*
@@ -16,7 +15,7 @@ import kotlinx.android.synthetic.main.content_reading_page.*
 class ReadingPage : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        Log.i("PersonalInfoPage", "onCreate: Called")
+        Log.i("ReadingPage", "onCreate: Called")
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.content_reading_page)
@@ -24,6 +23,12 @@ class ReadingPage : AppCompatActivity() {
         addListener()
         addContent()
         startRecording()
+    }
+
+    override fun onStop() {
+        endRecording()
+
+        super.onStop()
     }
 
     private fun addListener() {
@@ -43,11 +48,10 @@ class ReadingPage : AppCompatActivity() {
 
     private fun startRecording() {
         try {
-            VideoCapture.StartRecord_FrontCamera()
+            VideoCapture.StartRecord_FrontCamera(this)
         }
         catch (e: Exception) {
-            e.printStackTrace()
-            MyPopupWindow.showTextPopup(ErrorMsg.RECORD_START_ERROR_MSG, this, R.id.readingPage) {
+            MyPopupWindow.showTextPopup(e.message, this, R.id.readingPage) {
                 startActivity(Intent(this, FileSelectionPage::class.java))
             }
         }
@@ -59,8 +63,7 @@ class ReadingPage : AppCompatActivity() {
             startActivity(Intent(this, FileSelectionPage::class.java))
         }
         catch (e: Exception) {
-            e.printStackTrace()
-            MyPopupWindow.showTextPopup(ErrorMsg.RECORD_END_ERROR_MSG, this, R.id.readingPage) {
+            MyPopupWindow.showTextPopup(e.message, this, R.id.readingPage) {
                 startActivity(Intent(this, FileSelectionPage::class.java))
             }
         }

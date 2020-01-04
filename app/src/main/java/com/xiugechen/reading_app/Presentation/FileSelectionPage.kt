@@ -9,6 +9,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.xiugechen.reading_app.Data.DataManager
+import com.xiugechen.reading_app.Data.VideoCapture
 import com.xiugechen.reading_app.R
 import kotlinx.android.synthetic.main.content_file_selection_page.*
 import kotlinx.android.synthetic.main.content_file_selection_page.backButton
@@ -23,6 +24,15 @@ class FileSelectionPage : AppCompatActivity() {
 
         addListener()
         addFiles()
+
+        try {
+            VideoCapture.init(this)
+        }
+        catch (e: Exception) {
+            MyPopupWindow.showTextPopup(e.message, this, R.id.readingPage) {
+                startActivity(Intent(this, FileSelectionPage::class.java))
+            }
+        }
     }
 
     private fun addListener() {

@@ -23,7 +23,7 @@ object MyPopupWindow {
      * Pop up new window from appActivity, with message textDisplay
      */
     @SuppressLint("InflateParams")
-    fun showTextPopup(textToDisplay: String, appActivity: AppCompatActivity, appLayout: Int,
+    fun showTextPopup(textToDisplay: String?, appActivity: AppCompatActivity, appLayout: Int,
                       closeFun: () -> Unit) {
 
         val inflater: LayoutInflater = appActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE)
@@ -53,7 +53,7 @@ object MyPopupWindow {
         val mPopupText = popupView.findViewById<TextView>(R.id.popupText)
         val closeButton = popupView.findViewById<Button>(R.id.closeButton)
 
-        mPopupText.text = textToDisplay
+        mPopupText.text = textToDisplay ?: ""
 
         closeButton.setOnClickListener {
             popupWindow.dismiss()
