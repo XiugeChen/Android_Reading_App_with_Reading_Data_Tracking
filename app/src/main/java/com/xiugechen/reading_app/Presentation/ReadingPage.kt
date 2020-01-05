@@ -12,7 +12,9 @@ import com.xiugechen.reading_app.Data.DataManager
 import com.xiugechen.reading_app.Data.REQUEST_VIDEO_PERMISSIONS
 import com.xiugechen.reading_app.Data.VideoCapture
 import com.xiugechen.reading_app.R
+import kotlinx.android.synthetic.main.content_introduction_page.*
 import kotlinx.android.synthetic.main.content_reading_page.*
+import kotlinx.android.synthetic.main.content_reading_page.backButton
 
 class ReadingPage : AppCompatActivity() {
 
@@ -59,6 +61,10 @@ class ReadingPage : AppCompatActivity() {
                 VibrationEffect.DEFAULT_AMPLITUDE))
 
             endRecording()
+        }
+
+        readingScrollView.setOnScrollChangeListener { _, scrollX, scrollY, oldScrollX, oldScrollY ->
+            DataManager.printScrollData(this, scrollX, scrollY, oldScrollX, oldScrollY)
         }
     }
 

@@ -1,7 +1,7 @@
 package com.xiugechen.reading_app.Data
 
 class Participant {
-    private var mFullname: String = ""
+    var mFullname: String = ""
 
     private var mGender: String = ""
 

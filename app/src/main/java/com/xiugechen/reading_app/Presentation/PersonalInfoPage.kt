@@ -45,7 +45,6 @@ class PersonalInfoPage : AppCompatActivity() {
             val gender = genders[genderSpinner.selectedItemPosition]
 
             DataManager.mParticipant = Participant(fullname, gender)
-            DataManager.printData()
 
             vibrator.vibrate(VibrationEffect.createOneShot(vibrate_interval, VibrationEffect.DEFAULT_AMPLITUDE))
             startActivity(Intent(this, FileSelectionPage::class.java))
