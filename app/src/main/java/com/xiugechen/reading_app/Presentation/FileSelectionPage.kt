@@ -2,6 +2,7 @@ package com.xiugechen.reading_app.Presentation
 
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.VibrationEffect
 import android.os.Vibrator
@@ -9,6 +10,8 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.xiugechen.reading_app.Data.DataManager
+import com.xiugechen.reading_app.Data.REQUEST_VIDEO_PERMISSIONS
+import com.xiugechen.reading_app.Data.VIDEO_PERMISSIONS
 import com.xiugechen.reading_app.Data.VideoCapture
 import com.xiugechen.reading_app.R
 import kotlinx.android.synthetic.main.content_file_selection_page.*
@@ -29,8 +32,26 @@ class FileSelectionPage : AppCompatActivity() {
             VideoCapture.init(this)
         }
         catch (e: Exception) {
-            MyPopupWindow.showTextPopup(e.message, this, R.id.readingPage) {
-                startActivity(Intent(this, FileSelectionPage::class.java))
+            popupErrorMsg(e.message)
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>,
+                                            grantResults: IntArray) {
+        when (requestCode) {
+            REQUEST_VIDEO_PERMISSIONS -> {
+                if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                    // permission granted
+                    try {
+                        VideoCapture.init(this)
+                    }
+                    catch (e: Exception) {
+                        popupErrorMsg(e.message)
+                    }
+                } else {
+                    // permission denied
+                    popupErrorMsg("This app need video and audio permission to run, please open them in system settings")
+                }
             }
         }
     }
@@ -64,5 +85,16 @@ class FileSelectionPage : AppCompatActivity() {
         fileRecyclerView.setHasFixedSize(true) // could use to improve performance if changes in content do not change the layout size of the RecyclerView
         fileRecyclerView.layoutManager = LinearLayoutManager(this)
         fileRecyclerView.adapter = FileAdapter(this)
+    }
+
+    private fun popupErrorMsg(msg: String?) {
+        MyPopupWindow.showTextPopup(msg, this, R.id.fileSelectionPage) {
+            if (DataManager.mParticipant.isSet()) {
+                startActivity(Intent(this, AgreementPage::class.java))
+            }
+            else {
+                startActivity(Intent(this, PersonalInfoPage::class.java))
+            }
+        }
     }
 }

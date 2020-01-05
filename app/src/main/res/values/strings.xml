@@ -27,4 +27,8 @@
         <item>Other</item>
         <item>Perfer not to answer</item>
     </string-array>
+
+    <!-- error and request -->
+    <string name="permission_request">This sample needs permission for camera and audio recording.</string>
+    <string name="name_miss_msg">Name required</string>
 </resources>

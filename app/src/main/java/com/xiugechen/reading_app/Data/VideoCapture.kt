@@ -2,26 +2,27 @@ package com.xiugechen.reading_app.Data
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Camera
+import android.content.pm.PackageManager
 import android.hardware.camera2.*
-import android.media.CamcorderProfile
-import android.media.MediaDataSource
 import android.media.MediaRecorder
-import android.os.Environment
 import android.os.Handler
 import android.os.HandlerThread
-import android.provider.MediaStore
 import android.util.Log
 import android.util.Size
 import android.util.SparseIntArray
 import android.view.Surface
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import com.xiugechen.reading_app.Presentation.MyPopupWindow
 import java.lang.Exception
 import java.util.concurrent.Semaphore
 import java.util.concurrent.TimeUnit
-import java.util.jar.Manifest
 
 object VideoCapture {
+    private const val FRAME_RATE = 30
+    private const val ENCODING_BIT_RATE = 10000000
+
     private var isRecording = false
 
     /**
@@ -79,8 +80,13 @@ object VideoCapture {
 
 
     fun init(appActivity: AppCompatActivity) {
-        openCamera(appActivity)
-        startBackgroundThread()
+        if (mCameraDevice == null || mMediaRecorder == null) {
+            openFrontCamera(appActivity)
+        }
+
+        if (backgroundThread == null || backgroundHandler == null) {
+            startBackgroundThread()
+        }
     }
 
     fun StartRecord_FrontCamera(appActivity: AppCompatActivity) {
@@ -88,14 +94,11 @@ object VideoCapture {
             throw RuntimeException("Front Camera already in use, please try again later")
         }
 
-        if (mCameraDevice == null || mMediaRecorder == null) {
-            openCamera(appActivity)
-            throw RuntimeException("Front Camera not open, please try again later")
-        }
+        if (mCameraDevice == null || mMediaRecorder == null
+            || backgroundThread == null || backgroundHandler == null) {
 
-        if (backgroundThread == null || backgroundHandler == null) {
-            startBackgroundThread()
-            throw RuntimeException("Front Camera background thread not set, please try again later")
+            init(appActivity)
+            throw RuntimeException("Front Camera not init, please try again later")
         }
 
         setUpMediaRecorder(appActivity)
@@ -121,17 +124,17 @@ object VideoCapture {
                     super.onReady(session)
 
                     try {
-                        val builder: CaptureRequest.Builder? = mCameraDevice?.createCaptureRequest(CameraDevice.TEMPLATE_RECORD)
-                        builder?.addTarget(mMediaRecorder?.surface!!)
-                        val request = builder!!.build()
-                        session.setRepeatingRequest(request, null, backgroundHandler)
-
                         appActivity.runOnUiThread {
+                            val builder: CaptureRequest.Builder? = mCameraDevice?.createCaptureRequest(CameraDevice.TEMPLATE_RECORD)
+                            builder?.addTarget(mMediaRecorder?.surface!!)
+                            val request = builder!!.build()
+                            session.setRepeatingRequest(request, null, backgroundHandler)
+
                             isRecording = true
                             mMediaRecorder?.start()
                         }
                     } catch (e: Exception) {
-
+                        throw RuntimeException("Media recorder start failed")
                     }
                 }
 
@@ -181,11 +184,15 @@ object VideoCapture {
 
     /**
      * Tries to open a [CameraDevice]. The result is listened by [stateCallback].
+     *
+     * Permission check is performed in hasPermissionsGranted
      */
-    private fun openCamera(appActivity: AppCompatActivity) {
-        appActivity.checkSelfPermission(android.Manifest.permission.CAMERA)
-        appActivity.checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
-        appActivity.checkSelfPermission(android.Manifest.permission.RECORD_AUDIO)
+    @SuppressLint("MissingPermission")
+    private fun openFrontCamera(appActivity: AppCompatActivity) {
+        if (!hasPermissionsGranted(VIDEO_PERMISSIONS, appActivity)) {
+            appActivity.requestPermissions(VIDEO_PERMISSIONS, REQUEST_VIDEO_PERMISSIONS)
+            return
+        }
 
         val manager = appActivity.getSystemService(Context.CAMERA_SERVICE) as CameraManager
 
@@ -227,8 +234,8 @@ object VideoCapture {
             setVideoSource(MediaRecorder.VideoSource.SURFACE)
             setOutputFormat(MediaRecorder.OutputFormat.MPEG_4)
             setOutputFile(getVideoFilePath(appActivity))
-            setVideoEncodingBitRate(10000000)
-            setVideoFrameRate(30)
+            setVideoEncodingBitRate(ENCODING_BIT_RATE)
+            setVideoFrameRate(FRAME_RATE)
             setVideoSize(videoSize.width, videoSize.height)
             setVideoEncoder(MediaRecorder.VideoEncoder.H264)
             setAudioEncoder(MediaRecorder.AudioEncoder.AAC)
@@ -239,6 +246,7 @@ object VideoCapture {
     /**
      * Starts a background thread and its [Handler].
      */
+    @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
     private fun startBackgroundThread() {
         backgroundThread = HandlerThread("VideoCapBackground")
         backgroundThread?.start()
@@ -292,8 +300,7 @@ object VideoCapture {
      * Get the external video storage path
      */
     private fun getVideoFilePath(context: Context?): String {
-        // val filename = "${System.currentTimeMillis()}.mp4"
-        val filename = "test.mp4"
+        val filename = "${System.currentTimeMillis()}.mp4"
         val dir = context?.getExternalFilesDir(null)
 
         return if (dir == null) {
@@ -302,4 +309,9 @@ object VideoCapture {
             "${dir.absolutePath}/$filename"
         }
     }
+
+    private fun hasPermissionsGranted(permissions: Array<String>, appActivity: AppCompatActivity) =
+        permissions.none {
+            ContextCompat.checkSelfPermission(appActivity, it) != PackageManager.PERMISSION_GRANTED
+        }
 }

@@ -9,7 +9,6 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.xiugechen.reading_app.Data.DataManager
-import com.xiugechen.reading_app.Data.ErrorMsg
 import com.xiugechen.reading_app.Data.Participant
 import com.xiugechen.reading_app.R
 import kotlinx.android.synthetic.main.content_personal_info_page.*
@@ -38,7 +37,7 @@ class PersonalInfoPage : AppCompatActivity() {
             val fullname: String = nameInputText.text.toString().trim()
 
             if (fullname.isEmpty()) {
-                Toast.makeText(this,ErrorMsg.NAME_MISS_ERROR_MSG, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,R.string.name_miss_msg, Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 

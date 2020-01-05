@@ -5,6 +5,8 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
+import android.os.VibrationEffect
+import android.os.Vibrator
 import android.transition.Slide
 import android.transition.TransitionManager
 import android.view.Gravity
@@ -56,6 +58,11 @@ object MyPopupWindow {
         mPopupText.text = textToDisplay ?: ""
 
         closeButton.setOnClickListener {
+            val vibrator = appActivity.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+            vibrator.vibrate(
+                VibrationEffect.createOneShot(appActivity.resources.getInteger(R.integer.vibrate_interval).toLong(),
+                    VibrationEffect.DEFAULT_AMPLITUDE))
+
             popupWindow.dismiss()
             closeFun()
         }
