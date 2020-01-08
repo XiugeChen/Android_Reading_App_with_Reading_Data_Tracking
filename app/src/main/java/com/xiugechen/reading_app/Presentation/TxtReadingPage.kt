@@ -12,17 +12,16 @@ import com.xiugechen.reading_app.Data.DataManager
 import com.xiugechen.reading_app.Data.REQUEST_VIDEO_PERMISSIONS
 import com.xiugechen.reading_app.Data.VideoCapture
 import com.xiugechen.reading_app.R
-import kotlinx.android.synthetic.main.content_introduction_page.*
-import kotlinx.android.synthetic.main.content_reading_page.*
-import kotlinx.android.synthetic.main.content_reading_page.backButton
+import kotlinx.android.synthetic.main.content_txt_reading_page.*
+import kotlinx.android.synthetic.main.content_txt_reading_page.backButton
 
-class ReadingPage : AppCompatActivity() {
+class TxtReadingPage : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         Log.i("ReadingPage", "onCreate: Called")
 
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.content_reading_page)
+        setContentView(R.layout.content_txt_reading_page)
 
         addListener()
         addContent()
@@ -69,13 +68,13 @@ class ReadingPage : AppCompatActivity() {
     }
 
     private fun addContent() {
-        textTitle.text = DataManager.mNextFileDisplay.fileTitle
-        textBody.text = DataManager.mNextFileDisplay.fileContent
+        textTitle.text = DataManager.mDataReader.mCachedInfo[DataManager.mNextFile]!!.fileTitle
+        textBody.text = DataManager.mDataReader.mCachedBody[DataManager.mNextFile]
     }
 
     private fun startRecording() {
         try {
-            VideoCapture.StartRecord_FrontCamera(this)
+            VideoCapture.StartRecord_FrontCamera(this, DataManager.mNextFile)
         }
         catch (e: Exception) {
             popupErrorMsg(e.message)

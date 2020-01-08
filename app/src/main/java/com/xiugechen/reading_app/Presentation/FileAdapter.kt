@@ -5,7 +5,6 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.VibrationEffect
 import android.os.Vibrator
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.xiugechen.reading_app.Data.DataManager
 import com.xiugechen.reading_app.Data.ReadIndicator
 import com.xiugechen.reading_app.R
-import java.lang.Exception
 
 class FileAdapter(val filePage: FileSelectionPage) : RecyclerView.Adapter<FileAdapter.ViewHolder>() {
 
@@ -26,21 +24,26 @@ class FileAdapter(val filePage: FileSelectionPage) : RecyclerView.Adapter<FileAd
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.filename.text = DataManager.mCachedFileDisplays[position].filename
-        holder.fileDescription.text = DataManager.mCachedFileDisplays[position].fileDiscription
+        val fileId = DataManager.mDataReader.mFileList[position]
+        val fileInfo = DataManager.mDataReader.mCachedInfo[fileId] !!
 
-        val readIndicator = DataManager.mCachedFileDisplays[position].readIndicator
+        holder.filename.text = fileInfo.filename
+        holder.fileDescription.text = fileInfo.fileDiscription
 
-        if (readIndicator.equals(ReadIndicator.UNREAD)) {
-            holder.readIndicator.text = "unread"
-            holder.readIndicator.setTextColor(Color.RED)
-        }
-        else if (readIndicator.equals(ReadIndicator.READ)) {
-            holder.readIndicator.text = "read"
-            holder.readIndicator.setTextColor(Color.GREEN)
-        }
-        else {
-            holder.readIndicator.text = ""
+        val readIndicator = fileInfo.readIndicator
+
+        when {
+            readIndicator == ReadIndicator.UNREAD -> {
+                holder.readIndicator.text = "unread"
+                holder.readIndicator.setTextColor(Color.RED)
+            }
+            readIndicator == ReadIndicator.READ -> {
+                holder.readIndicator.text = "read"
+                holder.readIndicator.setTextColor(Color.GREEN)
+            }
+            else -> {
+                holder.readIndicator.text = ""
+            }
         }
 
         holder.readButton.setOnClickListener {
@@ -48,13 +51,19 @@ class FileAdapter(val filePage: FileSelectionPage) : RecyclerView.Adapter<FileAd
             vibrator.vibrate(VibrationEffect.createOneShot(filePage.resources.getInteger(R.integer.vibrate_interval).toLong(),
                 VibrationEffect.DEFAULT_AMPLITUDE))
 
-            DataManager.mCachedFileDisplays[position].readIndicator = ReadIndicator.READ
-            DataManager.mNextFileDisplay = DataManager.mCachedFileDisplays[position]
-            filePage.startActivity(Intent(filePage, ReadingPage::class.java))
+            fileInfo.readIndicator = ReadIndicator.READ
+            DataManager.mNextFile = fileInfo.filename
+
+            if (fileInfo.filename.contains(".txt")) {
+                filePage.startActivity(Intent(filePage, TxtReadingPage::class.java))
+            }
+            else {
+                // filePage.startActivity(Intent(filePage, PdfReadingPage::class.java))
+            }
         }
     }
 
-    override fun getItemCount() : Int = DataManager.mCachedFileDisplays.size
+    override fun getItemCount() : Int = DataManager.mDataReader.mFileList.size
 
     class ViewHolder(fileView: View) : RecyclerView.ViewHolder(fileView) {
         val filename: TextView = fileView.findViewById(R.id.filename)

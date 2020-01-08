@@ -1,0 +1,27 @@
+[
+  {
+    "filename": "_agreement.txt",
+    "title": "Agreement",
+    "description": "No description"
+  },
+  {
+    "filename": "_introduction.txt",
+    "title": "Agreement",
+    "description": "No description"
+  },
+  {
+    "filename": "Deep Reading in History.txt",
+    "title": "Deep Reading in History",
+    "description": "This is a description"
+  },
+  {
+    "filename": "Classroom Management: Deep Reading vs. Light Reading.txt",
+    "title": "Classroom Management: Deep Reading vs. Light Reading",
+    "description": "This is another description"
+  },
+  {
+    "filename": "The Importance of Deep Learning.pdf",
+    "title": "The Importance of Deep Learning",
+    "description": "This is another description for pdf"
+  }
+]

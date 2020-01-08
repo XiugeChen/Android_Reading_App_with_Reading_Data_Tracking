@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.xiugechen.reading_app.Data.DataManager
 import com.xiugechen.reading_app.Data.REQUEST_VIDEO_PERMISSIONS
-import com.xiugechen.reading_app.Data.VIDEO_PERMISSIONS
 import com.xiugechen.reading_app.Data.VideoCapture
 import com.xiugechen.reading_app.R
 import kotlinx.android.synthetic.main.content_file_selection_page.*
@@ -72,12 +71,12 @@ class FileSelectionPage : AppCompatActivity() {
     }
 
     private fun addFiles() {
-        if (DataManager.mCachedFileDisplays.isEmpty()) {
+        if (DataManager.mDataReader.mFileList.isEmpty()) {
             var fileNames = this.resources.assets.list("reading_files")
 
             if (fileNames != null) {
                 for (fileName in fileNames) {
-                    DataManager.mDataReader.readTxtByName(this, fileName)
+                    DataManager.mDataReader.getReadingFile(this, fileName)
                 }
             }
         }

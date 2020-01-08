@@ -12,9 +12,7 @@ import android.util.Size
 import android.util.SparseIntArray
 import android.view.Surface
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.xiugechen.reading_app.Presentation.MyPopupWindow
 import java.lang.Exception
 import java.util.concurrent.Semaphore
 import java.util.concurrent.TimeUnit
@@ -89,7 +87,7 @@ object VideoCapture {
         }
     }
 
-    fun StartRecord_FrontCamera(appActivity: AppCompatActivity) {
+    fun StartRecord_FrontCamera(appActivity: AppCompatActivity, filename: String) {
         if (isRecording) {
             throw RuntimeException("Front Camera already in use, please try again later")
         }
@@ -101,7 +99,7 @@ object VideoCapture {
             throw RuntimeException("Front Camera not init, please try again later")
         }
 
-        setUpMediaRecorder(appActivity)
+        setUpMediaRecorder(appActivity, filename)
 
         // Set up Surface for MediaRecorder
         val recorderSurface = mMediaRecorder!!.surface
@@ -220,8 +218,9 @@ object VideoCapture {
     /**
      * Set up the media recorder
      */
-    private fun setUpMediaRecorder(appActivity: AppCompatActivity) {
+    private fun setUpMediaRecorder(appActivity: AppCompatActivity, filename: String) {
         val rotation = appActivity.windowManager.defaultDisplay.rotation
+
         when (sensorOrientation) {
             SENSOR_ORIENTATION_DEFAULT_DEGREES ->
                 mMediaRecorder?.setOrientationHint(DEFAULT_ORIENTATIONS.get(rotation))
@@ -233,7 +232,7 @@ object VideoCapture {
             setAudioSource(MediaRecorder.AudioSource.MIC)
             setVideoSource(MediaRecorder.VideoSource.SURFACE)
             setOutputFormat(MediaRecorder.OutputFormat.MPEG_4)
-            setOutputFile(getVideoFilePath(appActivity))
+            setOutputFile(getVideoFilePath(appActivity, filename))
             setVideoEncodingBitRate(ENCODING_BIT_RATE)
             setVideoFrameRate(FRAME_RATE)
             setVideoSize(videoSize.width, videoSize.height)
@@ -299,14 +298,15 @@ object VideoCapture {
     /**
      * Get the external video storage path
      */
-    private fun getVideoFilePath(context: Context?): String {
-        val filename = "${System.currentTimeMillis()}.mp4"
+    private fun getVideoFilePath(context: Context?, filename: String): String {
+        val cleanedFilename = filename.replace(Regex("\\..*"), "")
+        val output = "${cleanedFilename}_${System.currentTimeMillis()}.mp4"
         val dir = context?.getExternalFilesDir(null)
 
         return if (dir == null) {
-            filename
+            output
         } else {
-            "${dir.absolutePath}/$filename"
+            "${dir.absolutePath}/$output"
         }
     }
 

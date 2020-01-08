@@ -1,107 +1,117 @@
 package com.xiugechen.reading_app.Data
 
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.beust.klaxon.Klaxon
 import java.io.InputStream
 import java.lang.Exception
 
 class DataReader {
-    private var mCachedTxtId = HashMap<Int, Triple<String, String, String>>()
+    // make sure not add / at the end of each dir
+    private val READING_DIR = "reading_files"
+    private val EXPRI_DIR = "experiment_files"
+    private val INFO_DIR = "file_info"
+
+    private val FILE_INFO = "file_info.json"
+    private val AGREEMENT_FILE = "agreement.txt"
+    private val INTRO_FILE = "introduction.txt"
+
+    var mFileList = ArrayList<String>()
+    var mCachedInfo = HashMap<String, FileInfo>()
+    var mCachedBody = HashMap<String, String>()
+
+    var mIntro = Pair("", "")
+    var mAgreement = Pair("", "")
+
 
     /**
-     * Open resources from assets folder by file path, put read data into cached in DataManager
+     * Read predefined json file information, introduction and agreement files
      */
-    fun readTxtByName(activity: AppCompatActivity, filename: String) {
-        val filepath = "reading_files/$filename"
-
+    fun init(appActivity: AppCompatActivity) {
+        // read all file information
         try {
-            val inputStream: InputStream = activity.resources.assets.open(filepath)
-            val readResult = readTitleDescripBody(inputStream)
-            val file = FileDisplay(filename, readResult.first, readResult.second,
-                readResult.third, ReadIndicator.UNREAD)
+            val fileInfos = Klaxon().parseArray<FileInfo>( appActivity.assets.open("$INFO_DIR/$FILE_INFO") )
 
-            DataManager.mCachedFileDisplays.add(file)
+            if (fileInfos != null) {
+                for(fileInfo in fileInfos) {
+                    mCachedInfo[fileInfo.filename] = fileInfo
+                }
+            }
+
         } catch (e: Exception) {
-            e.printStackTrace()
+            Log.e("DataReader", "Reading error from file info, error: ${e.message}")
+        }
+
+        // read agreement
+        val agreement = mCachedInfo[AGREEMENT_FILE]
+
+        mAgreement = if (agreement != null) {
+            Pair(agreement.filename, readAssetFile(appActivity, "$EXPRI_DIR/$AGREEMENT_FILE"))
+        } else {
+            Pair("Agreement", readAssetFile(appActivity, "$EXPRI_DIR/$AGREEMENT_FILE"))
+        }
+
+        // read introduction
+        val intro = mCachedInfo[INTRO_FILE]
+
+        mIntro = if (intro != null) {
+            Pair(intro.filename, readAssetFile(appActivity, "$EXPRI_DIR/$INTRO_FILE"))
+        } else {
+            Pair("Introduction", readAssetFile(appActivity, "$EXPRI_DIR/$INTRO_FILE"))
         }
     }
 
     /**
-     * Open resources from res folder by res id, return data
+     * Open file resources from assets folder by file path, put read data into cached in DataManager
      */
-    fun readTxtById(activity: AppCompatActivity, fileResId: Int): Triple<String, String, String> {
-        if (this.mCachedTxtId.containsKey(fileResId)) {
-            val result = this.mCachedTxtId[fileResId]
+    fun getReadingFile(appActivity: AppCompatActivity, filename: String) {
+        val file = filename.trim()
 
-            if (result != null) return result
+        if (file.endsWith(".txt")) {
+            getTxtReadingFile(appActivity, file)
         }
-        else {
-            try {
-                val inputStream: InputStream = activity.resources.openRawResource(fileResId)
-                val result = readTitleDescripBody(inputStream)
-
-                this.mCachedTxtId[fileResId] = result
-                return result
-
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
+        else if (file.endsWith(".pdf")) {
+            getPdfReadingFile(file)
         }
-
-        return Triple("Something wrong with cached file", "", "please try it again")
     }
 
-    private fun readTitleDescripBody(inputStream: InputStream): Triple<String, String, String> {
-        var title = ""
-        var description = ""
-        var body = ""
-
-        var readTitle = false
-        var readDescription = false
-        var readBody = false
-
-
-        val lineList = mutableListOf<String>()
-
-        inputStream.bufferedReader().useLines { lines -> lines.forEach { lineList.add(it)} }
-
-        for (line in lineList) {
-            if (line.startsWith("<title>")) {
-                readTitle = true
-                readDescription = false
-                readBody = false
-                continue
-            }
-            else if (line.startsWith("<description>")) {
-                readTitle = false
-                readDescription = true
-                readBody = false
-                continue
-            }
-            else if (line.startsWith("<body>")) {
-                readTitle = false
-                readDescription = false
-                readBody = true
-                continue
-            }
-            else {
-                if (readTitle) {
-                    title += line + "\n"
-                }
-
-                if (readDescription) {
-                    description += line + "\n"
-                }
-
-                if (readBody) {
-                    body += line + "\n"
-                }
-            }
+    /**
+     * Open pdf file resources from assets folder by file path, put read data into cached in DataManager
+     */
+    private fun getPdfReadingFile(filename: String) {
+        if (!mCachedInfo.containsKey(filename)) {
+            mCachedInfo[filename] = FileInfo(filename)
         }
 
-        title = title.trim()
-        description = description.trim()
-        body = body.trim()
+        if (!mCachedBody.containsKey(filename)) {
+            mCachedBody[filename] = ""
+        }
 
-        return Triple(title, description, body)
+        mFileList.add(filename)
+    }
+
+    /**
+     * Open txt file resources from assets folder by file path, put read data into cached in DataManager
+     */
+    private fun getTxtReadingFile(appActivity: AppCompatActivity, filename: String) {
+        if (!mCachedInfo.containsKey(filename)) {
+            mCachedInfo[filename] = FileInfo(filename)
+        }
+
+        if (!mCachedBody.containsKey(filename)) {
+            mCachedBody[filename] = readAssetFile(appActivity, "$READING_DIR/$filename")
+        }
+
+        mFileList.add(filename)
+    }
+
+    private fun readAssetFile(appActivity: AppCompatActivity, filePath: String): String {
+        try {
+            val inputStream: InputStream = appActivity.assets.open(filePath)
+            return inputStream.bufferedReader().use { it.readText() }
+        } catch (e: Exception) {
+            Log.e("DataReader", "Reading error from $filePath, error: ${e.message}")
+            return ""
+        }
     }
 }

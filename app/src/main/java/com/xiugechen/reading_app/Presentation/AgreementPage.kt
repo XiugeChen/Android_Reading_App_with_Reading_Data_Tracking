@@ -50,8 +50,8 @@ class AgreementPage : AppCompatActivity() {
     }
 
     private fun setAgreementText() {
-        val readText = DataManager.mDataReader.readTxtById(this, R.raw._agreement)
+        val readText = DataManager.mDataReader.mAgreement
         agreementTextTitle.text = readText.first
-        agreementTextBody.text = readText.third
+        agreementTextBody.text = readText.second
     }
 }
