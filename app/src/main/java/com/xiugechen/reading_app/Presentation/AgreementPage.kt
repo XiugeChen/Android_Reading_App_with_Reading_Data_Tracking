@@ -7,6 +7,7 @@ import android.os.VibrationEffect
 import android.os.Vibrator
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.xiugechen.reading_app.Data.Config
 import com.xiugechen.reading_app.Data.DataManager
 import com.xiugechen.reading_app.R
 import kotlinx.android.synthetic.main.content_agreement_page.*
@@ -15,8 +16,14 @@ class AgreementPage : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         Log.i("AgreementPage", "onCreate: Called")
-
         super.onCreate(savedInstanceState)
+
+        if (Config.isBlackMode) {
+            setTheme(R.style.DarkTheme)
+        }
+        else {
+            setTheme(R.style.LightTheme)
+        }
         setContentView(R.layout.content_agreement_page)
 
         addListener()
@@ -46,6 +53,14 @@ class AgreementPage : AppCompatActivity() {
 
         agreementCheckBox.setOnClickListener {
             nextButton.isEnabled = !nextButton.isEnabled
+
+            if (nextButton.isEnabled && Config.isBlackMode) {
+                nextButton.setTextColor(backButton.currentTextColor)
+            }
+
+            if (!nextButton.isEnabled) {
+                nextButton.setTextColor(resources.getColor(R.color.light_gray, this.theme))
+            }
         }
     }
 

@@ -4,7 +4,8 @@
     android:id="@+id/agreementPage"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="?attr/backgroundColor">
 
 
     <Button
@@ -16,6 +17,7 @@
         android:enabled="false"
         android:text="@string/next_action"
         android:textSize="@dimen/page_switch_text_size"
+        android:textColor="@color/light_gray"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -27,7 +29,7 @@
         android:fontFamily="@font/roboto"
         android:text="@string/back_action"
         android:textSize="@dimen/page_switch_text_size"
-        android:textColor="@color/black"
+        android:textColor="?attr/textColor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -37,8 +39,9 @@
         android:layout_height="wrap_content"
         android:text="@string/agreement_prompt"
         android:textSize="@dimen/default_text_size"
-        android:textColor="@color/black"
+        android:textColor="?attr/textColor"
         android:fontFamily="@font/roboto"
+        android:buttonTint="?attr/textColor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -54,7 +57,7 @@
         android:textSize="@dimen/default_text_size"
         android:fontFamily="@font/roboto_black"
         android:textStyle="bold"
-        android:textColor="@color/black"
+        android:textColor="?attr/textColor"
         android:padding="@dimen/text_padding"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -81,7 +84,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/default_text_size"
-                android:textColor="@color/black"
+                android:textColor="?attr/textColor"
                 android:padding="@dimen/text_padding"
                 android:fontFamily="@font/roboto"
                 android:justificationMode="inter_word" />

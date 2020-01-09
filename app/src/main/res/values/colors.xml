@@ -14,6 +14,8 @@
     <color name="fileDescription">#A2A1A1</color>
 
     <!-- base color -->
-    <color name="light_gray">#B6B3B3</color>
+    <color name="light_gray">#aeaeae</color>
     <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="deep_gray">#606060</color>
 </resources>

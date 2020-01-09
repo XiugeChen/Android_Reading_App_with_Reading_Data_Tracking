@@ -17,7 +17,7 @@
     <string name="welcome_prompt">Welcome!</string>
     <string name="agreement_prompt">By checking this box, I confirmed that …</string>
     <string name="name_input_prompt">Please enter your name below: </string>
-    <string name="name_hint_prompt">Full Name</string>
+    <string name="name_hint_prompt">Full Name required</string>
     <string name="gender_input_prompt">Please select your gender below: </string>
 
     <!-- array -->

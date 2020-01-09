@@ -4,11 +4,21 @@
     android:id="@+id/fileSelectionRow"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/card_margin">
+    android:layout_margin="@dimen/card_margin"
+    app:contentPadding="1dp"
+    app:cardElevation="1dp"
+    app:cardCornerRadius="1dp">
+
+    <!-- border of card view -->
+    <FrameLayout
+        android:background="@color/white"
+        android:layout_width="1dp"
+        android:layout_height="match_parent"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="?attr/backgroundColor">
 
         <TextView
             android:id="@+id/filename"
@@ -18,7 +28,7 @@
             android:textSize="@dimen/default_text_size"
             android:textStyle="bold"
             android:fontFamily="@font/roboto_black"
-            android:textColor="@color/black"
+            android:textColor="?attr/textColor"
             app:layout_constraintRight_toLeftOf="@id/readButton"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -38,7 +48,7 @@
             android:id="@+id/fileDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/fileDescription"
+            android:textColor="?attr/textColor"
             android:padding="@dimen/text_padding"
             android:fontFamily="@font/roboto"
             app:layout_constraintStart_toStartOf="parent"
@@ -50,7 +60,7 @@
             android:layout_height="wrap_content"
             android:text="@string/read_action"
             android:textSize="@dimen/inpage_text_size"
-            android:textColor="@color/black"
+            android:textColor="?attr/textColor"
             android:background="@drawable/lighted_round_button"
             android:fontFamily="@font/roboto"
             app:layout_constraintRight_toRightOf="parent"

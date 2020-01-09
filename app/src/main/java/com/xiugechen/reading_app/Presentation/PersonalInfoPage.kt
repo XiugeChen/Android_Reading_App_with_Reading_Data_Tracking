@@ -6,8 +6,10 @@ import android.os.Bundle
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.util.Log
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.xiugechen.reading_app.Data.Config
 import com.xiugechen.reading_app.Data.DataManager
 import com.xiugechen.reading_app.Data.Participant
 import com.xiugechen.reading_app.R
@@ -17,11 +19,18 @@ class PersonalInfoPage : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         Log.i("PersonalInfoPage", "onCreate: Called")
-
         super.onCreate(savedInstanceState)
+
+        if (Config.isBlackMode) {
+            setTheme(R.style.DarkTheme)
+        }
+        else {
+            setTheme(R.style.LightTheme)
+        }
         setContentView(R.layout.content_personal_info_page)
 
         addListener()
+        setUpSpinner()
     }
 
     private fun addListener() {
@@ -49,5 +58,15 @@ class PersonalInfoPage : AppCompatActivity() {
             vibrator.vibrate(VibrationEffect.createOneShot(vibrate_interval, VibrationEffect.DEFAULT_AMPLITUDE))
             startActivity(Intent(this, FileSelectionPage::class.java))
         }
+    }
+
+    private fun setUpSpinner() {
+        // Initializing a String Array
+        val items = resources.getStringArray(R.array.gender_arrays)
+
+        // Initializing an ArrayAdapter
+        val spinnerArrayAdapter = ArrayAdapter<String>(this, R.layout.spinner_item, items)
+        spinnerArrayAdapter.setDropDownViewResource(R.layout.spinner_item)
+        genderSpinner.setAdapter(spinnerArrayAdapter)
     }
 }

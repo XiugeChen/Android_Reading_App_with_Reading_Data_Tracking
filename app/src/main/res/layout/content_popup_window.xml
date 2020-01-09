@@ -5,6 +5,7 @@
     android:orientation="vertical"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:background="?attr/backgroundColor"
     android:gravity="center"
     android:paddingLeft="10dp"
     android:paddingRight="10dp">
@@ -26,7 +27,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_black"
-                android:textColor="@color/black"
+                android:textColor="?attr/textColor"
                 android:textSize="@dimen/default_text_size"
                 android:padding="10dp"/>
 
@@ -36,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/lighted_round_button"
                 android:fontFamily="@font/roboto"
-                android:textColor="@color/black"
+                android:textColor="?attr/textColor"
                 android:text="@string/close_action" />
 
         </LinearLayout>

@@ -9,6 +9,7 @@ import android.os.Vibrator
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.xiugechen.reading_app.Data.Config
 import com.xiugechen.reading_app.Data.DataManager
 import com.xiugechen.reading_app.Data.REQUEST_VIDEO_PERMISSIONS
 import com.xiugechen.reading_app.Data.VideoCapture
@@ -20,8 +21,14 @@ class FileSelectionPage : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         Log.i("FileSelectionPage", "onCreate: Called")
-
         super.onCreate(savedInstanceState)
+
+        if (Config.isBlackMode) {
+            setTheme(R.style.DarkTheme)
+        }
+        else {
+            setTheme(R.style.LightTheme)
+        }
         setContentView(R.layout.content_file_selection_page)
 
         addListener()

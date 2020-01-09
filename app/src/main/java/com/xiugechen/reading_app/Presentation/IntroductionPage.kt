@@ -7,8 +7,8 @@ import android.os.VibrationEffect
 import android.os.Vibrator
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.xiugechen.reading_app.Data.Config
 import com.xiugechen.reading_app.Data.DataManager
-import com.xiugechen.reading_app.MainActivity
 import com.xiugechen.reading_app.R
 import kotlinx.android.synthetic.main.content_introduction_page.*
 
@@ -16,8 +16,14 @@ class IntroductionPage : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         Log.i("IntroductionPage", "onCreate: Called")
-
         super.onCreate(savedInstanceState)
+
+        if (Config.isBlackMode) {
+            setTheme(R.style.DarkTheme)
+        }
+        else {
+            setTheme(R.style.LightTheme)
+        }
         setContentView(R.layout.content_introduction_page)
 
         addListener()
@@ -35,7 +41,7 @@ class IntroductionPage : AppCompatActivity() {
 
         backButton.setOnClickListener {
             vibrator.vibrate(VibrationEffect.createOneShot(vibrate_interval, VibrationEffect.DEFAULT_AMPLITUDE))
-            startActivity(Intent(this, MainActivity::class.java))
+            startActivity(Intent(this, StartPage::class.java))
         }
     }
 

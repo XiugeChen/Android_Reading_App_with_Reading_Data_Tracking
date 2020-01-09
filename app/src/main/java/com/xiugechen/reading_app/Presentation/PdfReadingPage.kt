@@ -8,6 +8,7 @@ import android.os.Vibrator
 import android.util.Log
 import com.github.barteksc.pdfviewer.listener.OnPageScrollListener
 import com.github.barteksc.pdfviewer.util.FitPolicy
+import com.xiugechen.reading_app.Data.Config
 import com.xiugechen.reading_app.Data.DataManager
 import com.xiugechen.reading_app.R
 import kotlinx.android.synthetic.main.content_pdf_reading_page.*
@@ -15,8 +16,14 @@ import kotlinx.android.synthetic.main.content_pdf_reading_page.*
 class PdfReadingPage : ReadingPage(), OnPageScrollListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         Log.i("PdfReadingPage", "onCreate: Called")
-
         super.onCreate(savedInstanceState)
+
+        if (Config.isBlackMode) {
+            setTheme(R.style.DarkTheme)
+        }
+        else {
+            setTheme(R.style.LightTheme)
+        }
         setContentView(R.layout.content_pdf_reading_page)
 
         addListener()
@@ -54,6 +61,7 @@ class PdfReadingPage : ReadingPage(), OnPageScrollListener {
             .onPageScroll(this)
             .enableDoubletap(true)
             .pageFitPolicy(FitPolicy.WIDTH)
+            .nightMode(Config.isBlackMode)
             .load()
     }
 }
