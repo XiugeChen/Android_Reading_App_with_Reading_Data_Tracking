@@ -84,7 +84,7 @@ class DataReader {
         }
 
         if (!mCachedBody.containsKey(filename)) {
-            mCachedBody[filename] = ""
+            mCachedBody[filename] = "$READING_DIR/$filename"
         }
 
         mFileList.add(filename)
@@ -106,12 +106,12 @@ class DataReader {
     }
 
     private fun readAssetFile(appActivity: AppCompatActivity, filePath: String): String {
-        try {
+        return try {
             val inputStream: InputStream = appActivity.assets.open(filePath)
-            return inputStream.bufferedReader().use { it.readText() }
+            inputStream.bufferedReader().use { it.readText() }
         } catch (e: Exception) {
             Log.e("DataReader", "Reading error from $filePath, error: ${e.message}")
-            return ""
+            ""
         }
     }
 }

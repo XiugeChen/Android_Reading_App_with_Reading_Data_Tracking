@@ -58,7 +58,7 @@ class FileAdapter(val filePage: FileSelectionPage) : RecyclerView.Adapter<FileAd
                 filePage.startActivity(Intent(filePage, TxtReadingPage::class.java))
             }
             else {
-                // filePage.startActivity(Intent(filePage, PdfReadingPage::class.java))
+                filePage.startActivity(Intent(filePage, PdfReadingPage::class.java))
             }
         }
     }
