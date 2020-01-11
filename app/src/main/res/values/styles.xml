@@ -20,9 +20,10 @@
     <!-- Theme -->
     <style name="LightTheme" parent="AppTheme">
         <item name="textColor">@color/black</item>
-        <item name="hintTextColor">@color/light_gray</item>
+        <item name="hintTextColor">@color/deep_gray</item>
         <item name="backgroundColor">@color/white</item>
-        <item name="subbackgroundColor">@color/white</item>
+        <item name="subbackgroundColor">@color/light_gray</item>
+        <item name="switchText">Switch to Dark Theme</item>
     </style>
 
     <style name="DarkTheme" parent="AppTheme">
@@ -30,6 +31,7 @@
         <item name="hintTextColor">@color/light_gray</item>
         <item name="backgroundColor">@color/black</item>
         <item name="subbackgroundColor">@color/deep_gray</item>
+        <item name="switchText">Switch to Light Theme</item>
     </style>
 
 </resources>

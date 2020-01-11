@@ -2,10 +2,14 @@ package com.xiugechen.reading_app.Presentation
 
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import com.xiugechen.reading_app.Data.Config
 import com.xiugechen.reading_app.Data.DataManager
 import com.xiugechen.reading_app.Data.REQUEST_VIDEO_PERMISSIONS
 import com.xiugechen.reading_app.Data.VideoCapture
+import com.xiugechen.reading_app.R
 
 abstract class ReadingPage : AppCompatActivity() {
 

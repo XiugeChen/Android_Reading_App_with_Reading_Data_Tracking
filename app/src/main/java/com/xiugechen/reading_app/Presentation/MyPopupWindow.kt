@@ -2,8 +2,6 @@ package com.xiugechen.reading_app.Presentation
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.VibrationEffect
 import android.os.Vibrator
@@ -25,13 +23,13 @@ object MyPopupWindow {
      * Pop up new window from appActivity, with message textDisplay
      */
     @SuppressLint("InflateParams")
-    fun showTextPopup(textToDisplay: String?, appActivity: AppCompatActivity, appLayout: Int,
+    fun showTextPopup(textToDisplay: String?, appActivity: AppCompatActivity, appLayoutId: Int,
                       closeFun: () -> Unit) {
 
         val inflater: LayoutInflater = appActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE)
                 as LayoutInflater
 
-        val popupView = inflater.inflate(R.layout.content_popup_window, null)
+        val popupView = inflater.inflate(R.layout.popup_window, null)
 
         val popupWindow = PopupWindow(popupView, WIDTH, HEIGHT, FOCUSABLE)
 
@@ -68,7 +66,7 @@ object MyPopupWindow {
         }
 
         // Show the popup window on app only after all the lifecycle methods are called
-        val parentLayout = appActivity.findViewById<ViewGroup>(appLayout)
+        val parentLayout = appActivity.findViewById<ViewGroup>(appLayoutId)
 
         TransitionManager.beginDelayedTransition(parentLayout)
         parentLayout.post {

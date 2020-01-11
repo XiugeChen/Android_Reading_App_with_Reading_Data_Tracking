@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -13,7 +15,7 @@ import com.xiugechen.reading_app.Data.Config
 import com.xiugechen.reading_app.Data.DataManager
 import com.xiugechen.reading_app.Data.Participant
 import com.xiugechen.reading_app.R
-import kotlinx.android.synthetic.main.content_personal_info_page.*
+import kotlinx.android.synthetic.main.personal_info_page.*
 
 class PersonalInfoPage : AppCompatActivity() {
 
@@ -27,10 +29,28 @@ class PersonalInfoPage : AppCompatActivity() {
         else {
             setTheme(R.style.LightTheme)
         }
-        setContentView(R.layout.content_personal_info_page)
+        setContentView(R.layout.personal_info_page)
 
         addListener()
         setUpSpinner()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.settings) {
+            Config.isBlackMode = !Config.isBlackMode
+
+            finish()
+            startActivity(intent)
+
+            return true
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 
     private fun addListener() {

@@ -18,7 +18,7 @@ import com.xiugechen.reading_app.R
 class FileAdapter(val filePage: FileSelectionPage) : RecyclerView.Adapter<FileAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val fileView = LayoutInflater.from(parent.context).inflate(R.layout.content_file_selection_row, parent, false)
+        val fileView = LayoutInflater.from(parent.context).inflate(R.layout.file_selection_row, parent, false)
 
         return ViewHolder(fileView)
     }

@@ -4,4 +4,5 @@
     <attr name="subbackgroundColor" format="color"/>
     <attr name="textColor" format="color"/>
     <attr name="hintTextColor" format="color"/>
+    <attr name="switchText" format="string"/>
 </resources>

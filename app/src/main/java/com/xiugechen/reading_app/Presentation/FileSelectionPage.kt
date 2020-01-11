@@ -7,6 +7,8 @@ import android.os.Bundle
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.xiugechen.reading_app.Data.Config
@@ -14,8 +16,8 @@ import com.xiugechen.reading_app.Data.DataManager
 import com.xiugechen.reading_app.Data.REQUEST_VIDEO_PERMISSIONS
 import com.xiugechen.reading_app.Data.VideoCapture
 import com.xiugechen.reading_app.R
-import kotlinx.android.synthetic.main.content_file_selection_page.*
-import kotlinx.android.synthetic.main.content_file_selection_page.backButton
+import kotlinx.android.synthetic.main.file_selection_page.*
+import kotlinx.android.synthetic.main.file_selection_page.backButton
 
 class FileSelectionPage : AppCompatActivity() {
 
@@ -29,7 +31,7 @@ class FileSelectionPage : AppCompatActivity() {
         else {
             setTheme(R.style.LightTheme)
         }
-        setContentView(R.layout.content_file_selection_page)
+        setContentView(R.layout.file_selection_page)
 
         addListener()
         addFiles()
@@ -60,6 +62,24 @@ class FileSelectionPage : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.settings) {
+            Config.isBlackMode = !Config.isBlackMode
+
+            finish()
+            startActivity(intent)
+
+            return true
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 
     private fun addListener() {
