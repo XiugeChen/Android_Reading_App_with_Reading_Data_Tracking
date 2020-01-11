@@ -24,10 +24,20 @@ class PersonalInfoPage : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         if (Config.isBlackMode) {
-            setTheme(R.style.DarkTheme)
+            if (Config.isHorizontallySwipe) {
+                setTheme(R.style.DarkTheme_SwipeRead)
+            }
+            else {
+                setTheme(R.style.DarkTheme_VerticallyRead)
+            }
         }
         else {
-            setTheme(R.style.LightTheme)
+            if (Config.isHorizontallySwipe) {
+                setTheme(R.style.LightTheme_SwipeRead)
+            }
+            else {
+                setTheme(R.style.LightTheme_VerticallyRead)
+            }
         }
         setContentView(R.layout.personal_info_page)
 
@@ -41,12 +51,16 @@ class PersonalInfoPage : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.settings) {
+        if (item.itemId == R.id.theme_settings) {
             Config.isBlackMode = !Config.isBlackMode
-
             finish()
             startActivity(intent)
-
+            return true
+        }
+        else if (item.itemId == R.id.read_mode_settings) {
+            Config.isHorizontallySwipe = !Config.isHorizontallySwipe
+            finish()
+            startActivity(intent)
             return true
         }
 

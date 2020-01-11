@@ -18,20 +18,44 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <!-- Theme -->
-    <style name="LightTheme" parent="AppTheme">
+    <style name="LightTheme_VerticallyRead" parent="AppTheme">
         <item name="textColor">@color/black</item>
         <item name="hintTextColor">@color/deep_gray</item>
         <item name="backgroundColor">@color/white</item>
         <item name="subbackgroundColor">@color/light_gray</item>
-        <item name="switchText">Switch to Dark Theme</item>
+
+        <item name="themeSwitchText">Switch to Dark Theme</item>
+        <item name="readModeSwitchText">Switch to Horizontally Swipe</item>
     </style>
 
-    <style name="DarkTheme" parent="AppTheme">
+    <style name="DarkTheme_VerticallyRead" parent="AppTheme">
         <item name="textColor">@color/white</item>
         <item name="hintTextColor">@color/light_gray</item>
         <item name="backgroundColor">@color/black</item>
         <item name="subbackgroundColor">@color/deep_gray</item>
-        <item name="switchText">Switch to Light Theme</item>
+
+        <item name="themeSwitchText">Switch to Light Theme</item>
+        <item name="readModeSwitchText">Switch to Horizontally Swipe</item>
+    </style>
+
+    <style name="LightTheme_SwipeRead" parent="AppTheme">
+        <item name="textColor">@color/black</item>
+        <item name="hintTextColor">@color/deep_gray</item>
+        <item name="backgroundColor">@color/white</item>
+        <item name="subbackgroundColor">@color/light_gray</item>
+
+        <item name="themeSwitchText">Switch to Dark Theme</item>
+        <item name="readModeSwitchText">Switch to Vertically Swipe</item>
+    </style>
+
+    <style name="DarkTheme_SwipeRead" parent="AppTheme">
+        <item name="textColor">@color/white</item>
+        <item name="hintTextColor">@color/light_gray</item>
+        <item name="backgroundColor">@color/black</item>
+        <item name="subbackgroundColor">@color/deep_gray</item>
+
+        <item name="themeSwitchText">Switch to Light Theme</item>
+        <item name="readModeSwitchText">Switch to Vertically Swipe</item>
     </style>
 
 </resources>

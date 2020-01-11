@@ -18,12 +18,6 @@ class PdfReadingPage : ReadingPage(), OnPageScrollListener {
         Log.i("PdfReadingPage", "onCreate: Called")
         super.onCreate(savedInstanceState)
 
-        if (Config.isBlackMode) {
-            setTheme(R.style.DarkTheme)
-        }
-        else {
-            setTheme(R.style.LightTheme)
-        }
         setContentView(R.layout.pdf_reading_page)
 
         addListener()
@@ -38,7 +32,7 @@ class PdfReadingPage : ReadingPage(), OnPageScrollListener {
     }
 
     override fun onPageScrolled(page: Int, positionOffset: Float) {
-        DataManager.printPdfViewMoveData(this, page, positionOffset)
+        DataManager.printPdfMoveData(this, page, positionOffset)
     }
 
     private fun addListener() {
@@ -58,6 +52,7 @@ class PdfReadingPage : ReadingPage(), OnPageScrollListener {
         val filePath = DataManager.mDataReader.mCachedBody[DataManager.mNextFile]!!
 
         readingScrollView.fromAsset(filePath)
+            .swipeHorizontal(Config.isHorizontallySwipe)
             .onPageScroll(this)
             .enableDoubletap(true)
             .pageFitPolicy(FitPolicy.WIDTH)

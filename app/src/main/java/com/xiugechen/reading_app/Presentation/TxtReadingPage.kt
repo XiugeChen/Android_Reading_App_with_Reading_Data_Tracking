@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.util.Log
-import com.xiugechen.reading_app.Data.Config
 import com.xiugechen.reading_app.Data.DataManager
 import com.xiugechen.reading_app.R
 import kotlinx.android.synthetic.main.txt_reading_page.*
@@ -18,12 +17,6 @@ class TxtReadingPage : ReadingPage() {
         Log.i("ReadingPage", "onCreate: Called")
         super.onCreate(savedInstanceState)
 
-        if (Config.isBlackMode) {
-            setTheme(R.style.DarkTheme)
-        }
-        else {
-            setTheme(R.style.LightTheme)
-        }
         setContentView(R.layout.txt_reading_page)
 
         addListener()
@@ -47,7 +40,7 @@ class TxtReadingPage : ReadingPage() {
         }
 
         readingScrollView.setOnScrollChangeListener { _, scrollX, scrollY, oldScrollX, oldScrollY ->
-            DataManager.printScrollViewMoveData(this, scrollX, scrollY, oldScrollX, oldScrollY)
+            DataManager.printTxtMoveData(this, scrollX, scrollY, oldScrollX, oldScrollY)
         }
     }
 

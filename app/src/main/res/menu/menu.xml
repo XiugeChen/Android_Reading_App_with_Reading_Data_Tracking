@@ -2,9 +2,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.xiugechen.reading_app.Presentation.StartPage">
+
     <item
-        android:id="@+id/settings"
+        android:id="@+id/theme_settings"
         android:orderInCategory="100"
-        android:title="?attr/switchText"
+        android:title="?attr/themeSwitchText"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/read_mode_settings"
+        android:orderInCategory="100"
+        android:title="?attr/readModeSwitchText"
         app:showAsAction="never" />
 </menu>

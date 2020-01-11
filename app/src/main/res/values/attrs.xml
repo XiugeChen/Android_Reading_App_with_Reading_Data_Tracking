@@ -4,5 +4,6 @@
     <attr name="subbackgroundColor" format="color"/>
     <attr name="textColor" format="color"/>
     <attr name="hintTextColor" format="color"/>
-    <attr name="switchText" format="string"/>
+    <attr name="themeSwitchText" format="string"/>
+    <attr name="readModeSwitchText" format="string"/>
 </resources>

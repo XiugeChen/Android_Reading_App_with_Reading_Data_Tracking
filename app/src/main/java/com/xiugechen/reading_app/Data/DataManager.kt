@@ -3,15 +3,12 @@ package com.xiugechen.reading_app.Data
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import java.io.File
-import java.lang.Exception
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 object DataManager {
-    private val TXT_SCROLL_HEADER = "TxtScrollData:Fullname,Gender,TimeMs,Filename,NewX,NewY,OldX,OldY\n"
-    private val PDF_SCROLL_HEADER = "PdfScrollData:Fullname,Gender,TimeMs,Filename,Page,PositionOffset\n"
-
-    private val FLIP_HEADER = "FlipData:Fullname,Gender,TimeMs,Filename,FlipAction\n"
+    private const val TXT_HEADER = "TxtData:Fullname,Gender,TimeMs,Filename,NewX,NewY,OldX,OldY\n"
+    private const val PDF_HEADER = "PdfData:Fullname,Gender,TimeMs,Filename,Page,PositionOffset\n"
 
     private var outputFilepath = "Default.txt"
 
@@ -21,89 +18,76 @@ object DataManager {
 
     var mNextFile = ""
 
-    fun printScrollViewMoveData(appActivity: AppCompatActivity, x: Int=0, y: Int=0, oldX: Int=0, oldY: Int=0) {
+    fun printTxtMoveData(
+        appActivity: AppCompatActivity,
+        x: Int = 0,
+        y: Int = 0,
+        oldX: Int = 0,
+        oldY: Int = 0
+    ) {
         val cleanedFilename = mNextFile.replace(Regex("\\..*"), "")
 
-        val outputMsg = "TxtScrollData:$mParticipant,%d,%s,%d,%d,%d,%d\n"
+        val outputMsg = "TxtData:$mParticipant,%d,%s,%d,%d,%d,%d\n"
             .format(System.currentTimeMillis(), cleanedFilename, x, y, oldX, oldY)
 
         val current = LocalDateTime.now().format(DateTimeFormatter.BASIC_ISO_DATE)
 
-        val filename = "%s_%s_%s_TxtScroll.txt"
+        val filename = "%s_%s_%s_Txt.txt"
             .format(mParticipant.mFullname, cleanedFilename, current)
 
         try {
             if (!outputFilepath.contains(filename)) {
-                getOutputPath(appActivity, filename, true, true)
+                getOutputPath(appActivity, filename, true)
             }
 
             val outputFile = File(outputFilepath)
 
             outputFile.appendText(outputMsg)
         } catch (e: Exception) {
-            Log.e("DataManager", "Write to txt scroll output file failed, write to terminal")
+            Log.e("DataManager", "Write to txt output file failed, write to terminal")
 
-            Log.i("printScrollViewData", outputMsg)
+            Log.e("printTxtMoveData", outputMsg)
         }
     }
 
-    fun printPdfViewMoveData(appActivity: AppCompatActivity, page: Int, positionOffset: Float) {
+    fun printPdfMoveData(
+        appActivity: AppCompatActivity,
+        page: Int,
+        positionOffset: Float
+    ) {
         val cleanedFilename = mNextFile.replace(Regex("\\..*"), "")
 
-        val outputMsg = "PdfScrollData:$mParticipant,%d,%s,%d,%f\n"
+        val outputMsg = "PdfData:$mParticipant,%d,%s,%d,%f\n"
             .format(System.currentTimeMillis(), cleanedFilename, page, positionOffset)
 
         val current = LocalDateTime.now().format(DateTimeFormatter.BASIC_ISO_DATE)
 
-        val filename = "%s_%s_%s_PdfScroll.txt"
+        val filename = "%s_%s_%s_Pdf.txt"
             .format(mParticipant.mFullname, cleanedFilename, current)
 
         try {
             if (!outputFilepath.contains(filename)) {
-                getOutputPath(appActivity, filename, false, true)
+                getOutputPath(appActivity, filename, false)
             }
 
             val outputFile = File(outputFilepath)
 
             outputFile.appendText(outputMsg)
         } catch (e: Exception) {
-            Log.e("DataManager", "Write to pdf scroll output file failed, write to terminal")
+            Log.e("DataManager", "Write to pdf output file failed, write to terminal")
 
-            Log.i("printPdfViewData", outputMsg)
-        }
-    }
-
-    fun printFlipData(appActivity: AppCompatActivity, flipAction: String) {
-        val cleanedFilename = mNextFile.replace(Regex("\\..*"), "")
-
-        val outputMsg = "FlipData:$mParticipant,%d,%s,%s\n"
-            .format(System.currentTimeMillis(), cleanedFilename, flipAction)
-
-        val current = LocalDateTime.now().format(DateTimeFormatter.BASIC_ISO_DATE)
-
-        val filename = "%s_%s_%s_flip.txt"
-            .format(mParticipant.mFullname, cleanedFilename, current)
-
-        try {
-            if (!outputFilepath.contains(filename)) {
-                getOutputPath(appActivity, filename, false, false)
-            }
-
-            val outputFile = File(outputFilepath)
-
-            outputFile.appendText(outputMsg)
-        } catch (e: Exception) {
-            Log.e("DataManager", "Write to flip output file failed, write to terminal")
-
-            Log.i("printFlipData", outputMsg)
+            Log.e("printPdfMoveData", outputMsg)
         }
     }
 
     /**
      * renew output file with new filename, and init output file with header
      */
-    private fun getOutputPath(appActivity: AppCompatActivity, filename: String,
-                              isTxt: Boolean, isScroll: Boolean) {
+    private fun getOutputPath(
+        appActivity: AppCompatActivity,
+        filename: String,
+        isTxt: Boolean
+    ) {
         val dir = appActivity.getExternalFilesDir(null)
 
         if (dir == null) {
@@ -114,16 +98,11 @@ object DataManager {
 
         val outputFile = File(outputFilepath)
 
-        if(isScroll) {
-            if (isTxt) {
-                outputFile.writeText(TXT_SCROLL_HEADER)
-            }
-            else {
-                outputFile.writeText(PDF_SCROLL_HEADER)
-            }
+        if (isTxt) {
+            outputFile.writeText(TXT_HEADER)
         }
         else {
-            outputFile.writeText(FLIP_HEADER)
+            outputFile.writeText(PDF_HEADER)
         }
     }
 }
