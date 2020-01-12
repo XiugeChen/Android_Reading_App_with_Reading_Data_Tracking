@@ -88,7 +88,7 @@ class AgreementPage : AppCompatActivity() {
         agreementCheckBox.setOnClickListener {
             nextButton.isEnabled = !nextButton.isEnabled
 
-            if (nextButton.isEnabled && Config.isBlackMode) {
+            if (nextButton.isEnabled) {
                 nextButton.setTextColor(backButton.currentTextColor)
             }
 

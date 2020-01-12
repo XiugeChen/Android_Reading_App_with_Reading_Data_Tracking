@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.util.Log
+import android.view.ViewGroup
 import com.xiugechen.reading_app.Data.DataManager
 import com.xiugechen.reading_app.R
 import kotlinx.android.synthetic.main.txt_verti_reading_page.*
@@ -40,9 +41,6 @@ class TxtVertiReadingPage : ReadingPage() {
 
         readingScrollView.setOnScrollChangeListener { _, scrollX, scrollY, oldScrollX, oldScrollY ->
             DataManager.printTxtVertiData(this, scrollX, scrollY, oldScrollX, oldScrollY)
-
-            val start = textBody.layout.getLineStart(0)
-            val end = textBody.layout.getLineEnd(textBody.lineCount - 1)
 
             Log.e("Start", "${textBody.layout.getLineStart(getFirstLineIndex())}")
             Log.e("End", "${textBody.layout.getLineEnd(getLastLineIndex())}")

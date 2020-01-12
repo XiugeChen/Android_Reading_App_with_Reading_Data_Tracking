@@ -31,6 +31,6 @@ class TxtHoriReadingViewPagerAdapter(val mContext: Context, val mData: ArrayList
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         var item = mData[position]
-        holder.myTextView.setText(item)
+        holder.myTextView.text = item
     }
 }
