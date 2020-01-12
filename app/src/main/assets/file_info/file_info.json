@@ -1,12 +1,12 @@
 [
   {
-    "filename": "_agreement.txt",
+    "filename": "agreement.txt",
     "title": "Agreement",
     "description": "No description"
   },
   {
-    "filename": "_introduction.txt",
-    "title": "Agreement",
+    "filename": "introduction.txt",
+    "title": "Introduction",
     "description": "No description"
   },
   {
@@ -15,7 +15,7 @@
     "description": "This is a description"
   },
   {
-    "filename": "Classroom Management: Deep Reading vs. Light Reading.txt",
+    "filename": "Classroom Management: Deep Reading vs Light Reading.txt",
     "title": "Classroom Management: Deep Reading vs. Light Reading",
     "description": "This is another description"
   },

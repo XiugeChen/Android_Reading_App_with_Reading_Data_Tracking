@@ -29,6 +29,7 @@
     </string-array>
 
     <!-- error and request -->
-    <string name="permission_request">This sample needs permission for camera and audio recording.</string>
-    <string name="name_miss_msg">Name required</string>
+    <string name="permission_request">[Error] This sample needs permission for camera and audio recording.</string>
+    <string name="name_miss_msg">[Error] Name required</string>
+    <string name="load_text_fail">[Error] Fail to load text</string>
 </resources>

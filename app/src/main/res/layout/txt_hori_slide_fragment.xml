@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/hori_slide_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView style="?android:textAppearanceMedium"
+        android:id="@+id/hori_slide_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/load_text_fail"
+        android:textSize="@dimen/default_text_size"
+        android:textColor="?attr/textColor"
+        android:padding="@dimen/text_padding"
+        android:fontFamily="@font/roboto"
+        android:justificationMode="inter_word"/>
+</RelativeLayout>

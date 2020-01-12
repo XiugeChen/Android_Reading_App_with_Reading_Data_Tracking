@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.xiugechen.reading_app.Data.Config
 import com.xiugechen.reading_app.Data.DataManager
 import com.xiugechen.reading_app.Data.ReadIndicator
 import com.xiugechen.reading_app.R
@@ -55,7 +56,13 @@ class FileAdapter(val filePage: FileSelectionPage) : RecyclerView.Adapter<FileAd
             DataManager.mNextFile = fileInfo.filename
 
             if (fileInfo.filename.contains(".txt")) {
-                filePage.startActivity(Intent(filePage, TxtReadingPage::class.java))
+                if (Config.isHorizontallySwipe) {
+                    filePage.startActivity(Intent(filePage, TxtHoriReadingPage::class.java))
+                }
+                else {
+                    filePage.startActivity(Intent(filePage, TxtVertiReadingPage::class.java))
+                }
+
             }
             else {
                 filePage.startActivity(Intent(filePage, PdfReadingPage::class.java))

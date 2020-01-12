@@ -23,7 +23,8 @@
         <activity android:name=".Presentation.IntroductionPage" />
         <activity android:name=".Presentation.PersonalInfoPage" />
         <activity android:name=".Presentation.FileSelectionPage" />
-        <activity android:name=".Presentation.TxtReadingPage" />
+        <activity android:name=".Presentation.TxtVertiReadingPage" />
+        <activity android:name=".Presentation.TxtHoriReadingPage" />
         <activity android:name=".Presentation.PdfReadingPage" />
         <activity android:name=".Presentation.MyPopupWindow" />
 

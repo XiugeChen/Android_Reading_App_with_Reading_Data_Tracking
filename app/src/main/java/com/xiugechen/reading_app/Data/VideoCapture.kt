@@ -1,6 +1,7 @@
 package com.xiugechen.reading_app.Data
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.content.pm.PackageManager
 import android.hardware.camera2.*
@@ -11,7 +12,6 @@ import android.util.Log
 import android.util.Size
 import android.util.SparseIntArray
 import android.view.Surface
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import java.lang.Exception
 import java.util.concurrent.Semaphore
@@ -77,7 +77,7 @@ object VideoCapture {
     }
 
 
-    fun init(appActivity: AppCompatActivity) {
+    fun init(appActivity: Activity) {
         if (mCameraDevice == null || mMediaRecorder == null) {
             openFrontCamera(appActivity)
         }
@@ -87,7 +87,7 @@ object VideoCapture {
         }
     }
 
-    fun StartRecord_FrontCamera(appActivity: AppCompatActivity, filename: String) {
+    fun StartRecord_FrontCamera(appActivity: Activity, filename: String) {
         if (isRecording) {
             throw RuntimeException("Front Camera already in use, please try again later")
         }
@@ -186,7 +186,7 @@ object VideoCapture {
      * Permission check is performed in hasPermissionsGranted
      */
     @SuppressLint("MissingPermission")
-    private fun openFrontCamera(appActivity: AppCompatActivity) {
+    private fun openFrontCamera(appActivity: Activity) {
         if (!hasPermissionsGranted(VIDEO_PERMISSIONS, appActivity)) {
             appActivity.requestPermissions(VIDEO_PERMISSIONS, REQUEST_VIDEO_PERMISSIONS)
             return
@@ -218,7 +218,7 @@ object VideoCapture {
     /**
      * Set up the media recorder
      */
-    private fun setUpMediaRecorder(appActivity: AppCompatActivity, filename: String) {
+    private fun setUpMediaRecorder(appActivity: Activity, filename: String) {
         val rotation = appActivity.windowManager.defaultDisplay.rotation
 
         when (sensorOrientation) {
@@ -310,7 +310,7 @@ object VideoCapture {
         }
     }
 
-    private fun hasPermissionsGranted(permissions: Array<String>, appActivity: AppCompatActivity) =
+    private fun hasPermissionsGranted(permissions: Array<String>, appActivity: Activity) =
         permissions.none {
             ContextCompat.checkSelfPermission(appActivity, it) != PackageManager.PERMISSION_GRANTED
         }
