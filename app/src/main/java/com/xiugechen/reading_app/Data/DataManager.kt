@@ -31,8 +31,10 @@ object DataManager {
         val outputMsg = "TxtVertiData:$mParticipant,%d,%s,%d,%d,%d,%d\n"
             .format(System.currentTimeMillis(), cleanedFilename, x, y, oldX, oldY)
 
-        val filename = "%s_%s_VertiTxt_${System.currentTimeMillis()}.txt"
-            .format(mParticipant.mFullname, cleanedFilename)
+        val current = LocalDateTime.now().format(DateTimeFormatter.BASIC_ISO_DATE)
+
+        val filename = "%s_%s_%s_VertiTxt.txt"
+            .format(mParticipant.mFullname, cleanedFilename, current)
 
         try {
             if (!outputFilepath.contains(filename)) {
@@ -59,8 +61,10 @@ object DataManager {
         val outputMsg = "PdfVertiData:$mParticipant,%d,%s,%d,%f\n"
             .format(System.currentTimeMillis(), cleanedFilename, page, positionOffset)
 
-        val filename = "%s_%s_VertiPdf_${System.currentTimeMillis()}.txt"
-            .format(mParticipant.mFullname, cleanedFilename)
+        val current = LocalDateTime.now().format(DateTimeFormatter.BASIC_ISO_DATE)
+
+        val filename = "%s_%s_%s_VertiPdf.txt"
+            .format(mParticipant.mFullname, cleanedFilename, current)
 
         try {
             if (!outputFilepath.contains(filename)) {
@@ -88,15 +92,17 @@ object DataManager {
         var filename: String
         var outputMsg: String
 
+        val current = LocalDateTime.now().format(DateTimeFormatter.BASIC_ISO_DATE)
+
         if (isTxt) {
-            filename = "%s_%s_HoriTxt_${System.currentTimeMillis()}.txt"
-                .format(mParticipant.mFullname, cleanedFilename)
+            filename = "%s_%s_%s_HoriTxt.txt"
+                .format(mParticipant.mFullname, cleanedFilename, current)
             outputMsg = "TxtHoriData:$mParticipant,%d,%s,%d,%d\n"
                 .format(System.currentTimeMillis(), cleanedFilename, page, pageCount)
         }
         else {
-            filename = "%s_%s_HoriPdf_${System.currentTimeMillis()}.txt"
-                .format(mParticipant.mFullname, cleanedFilename)
+            filename = "%s_%s_%s_HoriPdf.txt"
+                .format(mParticipant.mFullname, cleanedFilename, current)
             outputMsg = "PdfHoriTxtData:$mParticipant,%d,%s,%d,%d\n"
                 .format(System.currentTimeMillis(), cleanedFilename, page, pageCount)
         }
@@ -142,7 +148,6 @@ object DataManager {
             else {
                 outputFile.writeText("Pdf$HORI_HEADER")
             }
-            outputFile.writeText(HORI_HEADER)
         }
         else {
             if (isTxt) {
