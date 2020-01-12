@@ -35,7 +35,7 @@ abstract class ReadingPage : AppCompatActivity() {
     }
 
     override fun onStop() {
-        endRecording()
+        try { VideoCapture.EndRecordAndSave_FrontCamera() } catch (e: Exception) {}
         super.onStop()
     }
 

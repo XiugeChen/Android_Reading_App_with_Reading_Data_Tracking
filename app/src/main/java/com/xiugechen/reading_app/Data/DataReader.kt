@@ -46,7 +46,7 @@ class DataReader {
         val agreement = mCachedInfo[AGREEMENT_FILE]
 
         mAgreement = if (agreement != null) {
-            Pair(agreement.filename, readAssetFile(appActivity, "$EXPRI_DIR/$AGREEMENT_FILE"))
+            Pair(agreement.fileTitle, readAssetFile(appActivity, "$EXPRI_DIR/$AGREEMENT_FILE"))
         } else {
             Pair("Agreement", readAssetFile(appActivity, "$EXPRI_DIR/$AGREEMENT_FILE"))
         }
@@ -55,7 +55,7 @@ class DataReader {
         val intro = mCachedInfo[INTRO_FILE]
 
         mIntro = if (intro != null) {
-            Pair(intro.filename, readAssetFile(appActivity, "$EXPRI_DIR/$INTRO_FILE"))
+            Pair(intro.fileTitle, readAssetFile(appActivity, "$EXPRI_DIR/$INTRO_FILE"))
         } else {
             Pair("Introduction", readAssetFile(appActivity, "$EXPRI_DIR/$INTRO_FILE"))
         }
